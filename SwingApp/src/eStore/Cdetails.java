@@ -66,59 +66,82 @@ public class Cdetails extends JFrame {
 		setContentPane(contentPane);
 		
 		JLabel lblFirstName = new JLabel("First Name ");
+		lblFirstName.setBounds(43, 48, 102, 22);
 		
 		JLabel lblLastName = new JLabel("Last Name ");
+		lblLastName.setBounds(43, 97, 102, 22);
 		
 		JLabel lblEmailId = new JLabel("Email ID ");
+		lblEmailId.setBounds(43, 149, 102, 22);
 		
 		JLabel lblFirstName_1 = new JLabel("Password");
+		lblFirstName_1.setBounds(43, 208, 102, 22);
 		
 		JLabel lblConfirmPassword = new JLabel("Confirm Password");
+		lblConfirmPassword.setBounds(43, 257, 122, 22);
 		
 		JLabel lblAddress = new JLabel("Address");
+		lblAddress.setBounds(43, 315, 102, 22);
 		
 		JLabel lblState = new JLabel("State");
+		lblState.setBounds(43, 377, 102, 22);
 		
 		JLabel lblZip = new JLabel("Zip");
+		lblZip.setBounds(374, 380, 61, 22);
 		
 		JLabel lblNameOnCard = new JLabel("Name on Card");
+		lblNameOnCard.setBounds(43, 468, 82, 16);
 		
 		JLabel lblCardNumber = new JLabel("Card Number");
+		lblCardNumber.setBounds(43, 520, 82, 16);
 		
 		JLabel lblCvv = new JLabel("CVV");
+		lblCvv.setBounds(43, 554, 24, 16);
 		
 		JLabel lblExpiryDate = new JLabel("Expiry Date");
+		lblExpiryDate.setBounds(43, 596, 64, 16);
 		
 		textFName = new JTextField();
+		textFName.setBounds(181, 48, 116, 22);
 		textFName.setColumns(10);
 		
 		textLName = new JTextField();
+		textLName.setBounds(181, 97, 116, 22);
 		textLName.setColumns(10);
 		
 		textEmail = new JTextField();
+		textEmail.setBounds(181, 149, 116, 22);
 		textEmail.setColumns(10);
 		
 		txtAddress = new JTextField();
+		txtAddress.setBounds(183, 315, 169, 22);
 		txtAddress.setColumns(10);
 		
 		textNameCard = new JTextField();
+		textNameCard.setBounds(189, 465, 116, 22);
 		textNameCard.setColumns(10);
 		
 		JComboBox comboBox = new JComboBox();
+		comboBox.setBounds(189, 380, 66, 22);
 		
 		textZip = new JTextField();
+		textZip.setBounds(447, 380, 116, 22);
 		textZip.setColumns(10);
 		
 		textcardNumber = new JTextField();
+		textcardNumber.setBounds(189, 514, 116, 22);
 		textcardNumber.setColumns(10);
 		
 		textCVV = new JTextField();
+		textCVV.setBounds(189, 554, 116, 22);
 		textCVV.setColumns(10);
 		
 		textExp = new JTextField();
+		textExp.setBounds(189, 595, 116, 22);
 		textExp.setColumns(10);
 		
 		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.setBounds(407, 594, 73, 25);
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			// Needs to insert data into the customer table  
@@ -127,137 +150,45 @@ public class Cdetails extends JFrame {
 		btnSubmit.setBackground(new Color(154, 205, 50));
 		
 		JLabel lblAccountDetails = new JLabel("Account Details");
+		lblAccountDetails.setBounds(17, 16, 116, 19);
 		lblAccountDetails.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		JLabel lblCardDetails = new JLabel("Card Details");
+		lblCardDetails.setBounds(17, 420, 546, 19);
 		lblCardDetails.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		passwordField = new JPasswordField();
+		passwordField.setBounds(181, 199, 116, 22);
 		
 		passwordField_1 = new JPasswordField();
-		GroupLayout gl_contentPane = new GroupLayout(contentPane);
-		gl_contentPane.setHorizontalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(38)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblFirstName, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblEmailId, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblFirstName_1, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE))
-									.addGap(36)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(textEmail)
-										.addComponent(textLName)
-										.addComponent(textFName)
-										.addComponent(passwordField)))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addComponent(lblConfirmPassword, GroupLayout.PREFERRED_SIZE, 122, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblAddress, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblState, GroupLayout.PREFERRED_SIZE, 102, GroupLayout.PREFERRED_SIZE)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-											.addComponent(lblCardNumber, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-											.addComponent(lblNameOnCard, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-										.addComponent(lblCvv)
-										.addComponent(lblExpiryDate))
-									.addGap(18)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addGap(6)
-											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-												.addGroup(gl_contentPane.createSequentialGroup()
-													.addComponent(textExp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-													.addGap(102)
-													.addComponent(btnSubmit))
-												.addComponent(textCVV, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(textcardNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addComponent(textNameCard, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-												.addGroup(gl_contentPane.createSequentialGroup()
-													.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 66, GroupLayout.PREFERRED_SIZE)
-													.addGap(119)
-													.addComponent(lblZip, GroupLayout.PREFERRED_SIZE, 61, GroupLayout.PREFERRED_SIZE)
-													.addPreferredGap(ComponentPlacement.UNRELATED)
-													.addComponent(textZip, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-										.addComponent(passwordField_1, GroupLayout.PREFERRED_SIZE, 116, GroupLayout.PREFERRED_SIZE)
-										.addComponent(txtAddress, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)))))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblAccountDetails))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(lblCardDetails, GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)))
-					.addGap(138))
-		);
-		gl_contentPane.setVerticalGroup(
-			gl_contentPane.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(11)
-					.addComponent(lblAccountDetails)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblFirstName, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textFName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(27)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblLastName, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textLName, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(30)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblEmailId, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textEmail, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(37)
-							.addComponent(lblFirstName_1, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-							.addGap(27)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblConfirmPassword, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-								.addComponent(passwordField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(28)
-							.addComponent(passwordField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(36)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblAddress, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addComponent(txtAddress, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(40)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblState, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(3)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblZip, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
-								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textZip, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))))
-					.addGap(18)
-					.addComponent(lblCardDetails)
-					.addGap(26)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNameOnCard)
-						.addComponent(textNameCard, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(27)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblCardNumber)
-						.addComponent(textcardNumber, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblCvv)
-							.addGap(26)
-							.addComponent(lblExpiryDate))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(textCVV, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(18)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textExp, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(btnSubmit))))
-					.addContainerGap(22, Short.MAX_VALUE))
-		);
-		contentPane.setLayout(gl_contentPane);
+		passwordField_1.setBounds(183, 257, 116, 22);
+		contentPane.setLayout(null);
+		contentPane.add(lblFirstName);
+		contentPane.add(lblLastName);
+		contentPane.add(lblEmailId);
+		contentPane.add(lblFirstName_1);
+		contentPane.add(textEmail);
+		contentPane.add(textLName);
+		contentPane.add(textFName);
+		contentPane.add(passwordField);
+		contentPane.add(lblConfirmPassword);
+		contentPane.add(lblAddress);
+		contentPane.add(lblState);
+		contentPane.add(lblCardNumber);
+		contentPane.add(lblNameOnCard);
+		contentPane.add(lblCvv);
+		contentPane.add(lblExpiryDate);
+		contentPane.add(textExp);
+		contentPane.add(btnSubmit);
+		contentPane.add(textCVV);
+		contentPane.add(textcardNumber);
+		contentPane.add(textNameCard);
+		contentPane.add(comboBox);
+		contentPane.add(lblZip);
+		contentPane.add(textZip);
+		contentPane.add(passwordField_1);
+		contentPane.add(txtAddress);
+		contentPane.add(lblAccountDetails);
+		contentPane.add(lblCardDetails);
 	}
 }
