@@ -2,7 +2,8 @@
 FoodStore
 
 People when you clone this project change the Class path relative to ur jar location. I will make it generic in next commit. 
-You can find the jars in Res folder
+You can find the jars in Res folder.
+
 
 "---
 
@@ -13,3 +14,14 @@ You can find the jars in Res folder
 	classpathentry kind="lib" path="C:/Users/Goutham/Downloads/rs2xml.jar"/>
 	
  --"
+
+How to import the Db for windows users 
+
+Use cmd prompt in Admin mode: 
+cd to "C:\Program Files\MySQL\MySQL Server 5.7\bin" 
+
+then do
+
+mysql -u username –-password=your_password database_name < db.sql 
+
+http://dba.stackexchange.com/questions/24371/how-to-import-a-sql-file-in-mysql 
