@@ -1,5 +1,7 @@
 package eStore;
-
+import java.sql.*;
+import eStore.dbutilities;
+import eStore.Customer;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
@@ -13,23 +15,31 @@ import javax.swing.JLabel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JMenuBar;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.HeadlessException;
+
 import javax.swing.JPasswordField;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.awt.event.ActionEvent;
-
+import javax.swing.JTextPane;
+//INSERT INTO `inventory`.`account` (`customeID`, `customerFName`, `customerLName`, `customerAddress`, `addressState`, `zip`, `nameonCard`, `cardNumber`, `CVV`, `expiryDate`, `password`) VALUES ('gout.kannan', 'Goutham', 'Kannan', '2801 S King Dr', 'IL', '60616', 'Goutham Kannan', '525252525252525252', '100', '02/20', 'yo');
 public class Cdetails extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFName;
 	private JTextField textLName;
 	private JTextField textEmail;
-	private JTextField txtAddress;
+	
 	private JTextField textNameCard;
 	private JTextField textZip;
 	private JTextField textcardNumber;
@@ -37,6 +47,8 @@ public class Cdetails extends JFrame {
 	private JTextField textExp;
 	private JPasswordField passwordField;
 	private JPasswordField passwordField_1;
+	private JTextField textState;
+	private JTextPane textAddress;
 
 	/**
 	 * Launch the application.
@@ -102,38 +114,43 @@ public class Cdetails extends JFrame {
 		lblExpiryDate.setBounds(43, 596, 64, 16);
 		
 		textFName = new JTextField();
-		textFName.setBounds(181, 48, 116, 22);
+		textFName.setToolTipText("Enter First Name");
+		textFName.setBounds(181, 48, 179, 22);
 		textFName.setColumns(10);
 		
 		textLName = new JTextField();
-		textLName.setBounds(181, 97, 116, 22);
+		textLName.setToolTipText("Enter Last Name");
+		textLName.setBounds(181, 97, 179, 22);
 		textLName.setColumns(10);
 		
 		textEmail = new JTextField();
-		textEmail.setBounds(181, 149, 116, 22);
+		textEmail.setToolTipText("Enter emailId/Login Id");
+		textEmail.setBounds(181, 149, 179, 22);
 		textEmail.setColumns(10);
 		
-		txtAddress = new JTextField();
-		txtAddress.setBounds(183, 315, 169, 22);
-		txtAddress.setColumns(10);
+
+		
+		textAddress = new JTextPane();
+		textAddress.setBounds(181, 301, 194, 63);
+		
+		textState = new JTextField();
+		textState.setBounds(181, 385, 116, 22);
+		textState.setColumns(10);
 		
 		textNameCard = new JTextField();
-		textNameCard.setBounds(189, 465, 116, 22);
+		textNameCard.setBounds(189, 465, 186, 22);
 		textNameCard.setColumns(10);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(189, 380, 66, 22);
 		
 		textZip = new JTextField();
 		textZip.setBounds(447, 380, 116, 22);
 		textZip.setColumns(10);
 		
 		textcardNumber = new JTextField();
-		textcardNumber.setBounds(189, 514, 116, 22);
+		textcardNumber.setBounds(189, 514, 186, 22);
 		textcardNumber.setColumns(10);
 		
 		textCVV = new JTextField();
-		textCVV.setBounds(189, 554, 116, 22);
+		textCVV.setBounds(189, 554, 186, 22);
 		textCVV.setColumns(10);
 		
 		textExp = new JTextField();
@@ -141,10 +158,61 @@ public class Cdetails extends JFrame {
 		textExp.setColumns(10);
 		
 		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.setBounds(407, 594, 73, 25);
+		btnSubmit.setBounds(332, 592, 73, 25);
 		btnSubmit.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) 
+			{
 			// Needs to insert data into the customer table  
+			
+				try {
+					Customer cobj= new Customer(); 
+					
+					cobj.custFName = textFName.getText();
+					cobj.custLName  = textLName.getText();
+					cobj.custID = textEmail.getText();
+					cobj.custAddress = textAddress.getText();
+					cobj.custState = textState.getText();
+					if(passwordField.getPassword() == passwordField_1.getPassword())
+						cobj.custPswd = passwordField.getPassword().toString();
+					else
+						cobj.custPswd="temp";
+						
+					cobj.custZip = Integer.parseInt(textZip.getText());
+					cobj.nameonCard = textNameCard.getText();
+					cobj.cardNumber = Long.parseLong(textcardNumber.getText());
+					cobj.cvv = Integer.parseInt(textCVV.getText());
+					cobj.exp = textExp.getText(); 
+					
+					// get Db connection 
+					
+					dbutilities db = new dbutilities();
+					db.getDafaultConnection(); 
+					int err = db.updateCustomerDetails(cobj);
+					if (err==1)
+					{
+						JOptionPane.showMessageDialog(contentPane,"Welcome aboard "+ cobj.custID +" your account has been registered");
+					}
+					else if(err==2)
+					{
+						JOptionPane.showMessageDialog(contentPane,"Sorry "+ cobj.custID +" already exists, try a different one");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(contentPane,"Sorry registration falied ");
+					}
+				} catch (NumberFormatException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					JOptionPane.showMessageDialog(contentPane,"Sorry registration falied ");
+				} catch (HeadlessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					JOptionPane.showMessageDialog(contentPane,"Sorry registration falied ");
+				}
+			
+			
+			
+			      
 			}
 		});
 		btnSubmit.setBackground(new Color(154, 205, 50));
@@ -158,10 +226,11 @@ public class Cdetails extends JFrame {
 		lblCardDetails.setFont(new Font("Tahoma", Font.BOLD, 15));
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(181, 199, 116, 22);
+		passwordField.setToolTipText("Enter Password");
+		passwordField.setBounds(181, 199, 179, 22);
 		
 		passwordField_1 = new JPasswordField();
-		passwordField_1.setBounds(183, 257, 116, 22);
+		passwordField_1.setBounds(183, 257, 177, 22);
 		contentPane.setLayout(null);
 		contentPane.add(lblFirstName);
 		contentPane.add(lblLastName);
@@ -183,12 +252,15 @@ public class Cdetails extends JFrame {
 		contentPane.add(textCVV);
 		contentPane.add(textcardNumber);
 		contentPane.add(textNameCard);
-		contentPane.add(comboBox);
 		contentPane.add(lblZip);
 		contentPane.add(textZip);
 		contentPane.add(passwordField_1);
-		contentPane.add(txtAddress);
+		
 		contentPane.add(lblAccountDetails);
 		contentPane.add(lblCardDetails);
+	
+		contentPane.add(textAddress);
+		contentPane.add(textState);
+		
 	}
 }

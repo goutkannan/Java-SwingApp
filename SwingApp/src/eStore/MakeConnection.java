@@ -12,7 +12,7 @@ public class MakeConnection
 	            Statement stmt = null; 
 	            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/inventory","root","goutham911");
 	            System.out.println("\n Driver is connected Successfully");
-	            stmt = conn.createStatement();
+	            stmt = conn.createStatement();	
 	            String sql = "Create table Account( customeID varchar(20), customerFName varchar(20),"
 	            		+ "customerLName varchar(20),customerAddress varchar(200) )"; 
 	            
