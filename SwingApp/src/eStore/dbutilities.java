@@ -51,7 +51,7 @@ public class dbutilities
 		
 		ResultSet rs =null; 
 		try {
-			String query="select itemName,itemDescription,stock,price,discount from storelist";
+			String query="select itemName,itemDescription,icon,stock,price,discount from storelist";
 			PreparedStatement pst = connection.prepareStatement(query);
 			rs=pst.executeQuery();
 			

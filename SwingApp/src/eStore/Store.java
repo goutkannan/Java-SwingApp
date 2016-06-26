@@ -5,12 +5,20 @@ public class Store
 	String idItem;
 	String itemName;
 	String itemDescription; 
-	String stock;
+	int stock;
 	boolean inStock; 
 	float price;
 	float discount;
 	String dealerName;
 	boolean isnew;
+	byte[] icon;
+	
+	public byte[] getIcon() {
+		return icon;
+	}
+	public void setIcon(byte[] icon) {
+		this.icon = icon;
+	}
 	public String getIdItem() {
 		return idItem;
 	}
@@ -29,10 +37,10 @@ public class Store
 	public void setItemDescription(String itemDescription) {
 		this.itemDescription = itemDescription;
 	}
-	public String getStock() {
+	public int getStock() {
 		return stock;
 	}
-	public void setStock(String stock) {
+	public void setStock(int stock) {
 		this.stock = stock;
 	}
 	public boolean isInStock() {
