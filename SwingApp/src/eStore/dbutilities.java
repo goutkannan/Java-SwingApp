@@ -7,6 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 
 import eStore.Customer;
 
@@ -46,23 +49,66 @@ public class dbutilities
 			return 0;
 		}
 	}
-	public static ResultSet getStoreList()
+	public static ArrayList<Store> getStoreList()
 	{
 		
-		ResultSet rs =null; 
+		 
 		try {
 			String query="select itemName,itemDescription,icon,stock,price,discount from storelist";
 			PreparedStatement pst = connection.prepareStatement(query);
-			rs=pst.executeQuery();
+			ResultSet rs=pst.executeQuery();
+			
+			ArrayList<Store> data = new ArrayList<Store>();
+		
+			
+				while(rs.next())
+				{
+					Store p = new Store();
+					p.itemName = rs.getString("itemName"); 
+					p.itemDescription = rs.getString("itemDescription");
+					p.icon = rs.getBytes("icon");
+					p.stock = rs.getInt("stock");
+					p.price = rs.getInt("price");
+					p.discount = rs.getFloat("discount");
+					p.selected = false; 
+					data.add(p);
+				
+					byte[] img = rs.getBytes("icon");
+					ImageIcon image = new ImageIcon(img); 
+					
+				}
+			
+				return data; 
+			}
+		
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return null;
+		
+		
+	}
+	public static String validatepwd(String id)
+	{
+		 
+		try {
+			String query="select password from account where customerID="+"'"+id+"'";
+			PreparedStatement pst = connection.prepareStatement(query);
+			ResultSet rs=pst.executeQuery();
+			if(rs.next())
+				return rs.getString("password");
+			
 			
 		}
 		catch(Exception ex)
 		{
 			ex.printStackTrace();
 		}
+		return null;
 		
-		return rs;
 	}
+	
 
 
 	public static Connection getDafaultConnection() 

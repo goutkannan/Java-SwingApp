@@ -168,19 +168,105 @@ public class Cdetails extends JFrame {
 					Customer cobj= new Customer(); 
 					
 					cobj.custFName = textFName.getText();
+					if(cobj.custFName.equals(""))
+					{
+						JOptionPane.showMessageDialog(null,"No Data Entered");
+					}
+					if(!(cobj.custFName.matches("[a-zA-Z]*")))
+					{
+						JOptionPane.showMessageDialog(null, "Enter only aplhabets");
+					}
+
 					cobj.custLName  = textLName.getText();
+					if(cobj.custLName.equals(""))
+					{
+						JOptionPane.showMessageDialog(null,"No Data Entered");
+					}
+					if(!(cobj.custLName.matches("[a-zA-z]+([ '-][a-zA-Z]+)*")))
+					{
+						JOptionPane.showMessageDialog(null, "Enter only aplhabets");
+					}
+
+					String EMAIL_REGEX = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 					cobj.custID = textEmail.getText();
+					if(cobj.custID.equals(""))
+					{
+						JOptionPane.showMessageDialog(null, "Enter valid email address");
+					}
+					if(!(cobj.custID.matches(EMAIL_REGEX)))
+					{
+						JOptionPane.showMessageDialog(null, "Enter valid email address");
+					}
+
 					cobj.custAddress = textAddress.getText();
+					if(cobj.custAddress.equals(""))
+					{
+						JOptionPane.showMessageDialog(null,"No Data Entered");
+					}
+					if(!(cobj.custAddress.matches("\\d+\\s+([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)" )))
+					{
+						JOptionPane.showMessageDialog(null, "Enter valid Address");
+					}
+
 					cobj.custState = textState.getText();
+					if(cobj.custState.equals(""))
+					{
+						JOptionPane.showMessageDialog(null,"No Data Entered");
+					}
+					if(!(cobj.custState.matches("([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"   )))
+					{
+						JOptionPane.showMessageDialog(null, "Enter valid State");
+					}
+
 					if(passwordField.getPassword() == passwordField_1.getPassword())
 						cobj.custPswd = passwordField.getPassword().toString();
 					else
 						cobj.custPswd="temp";
-						
+					
+					int numberofDigits=1;	
 					cobj.custZip = Integer.parseInt(textZip.getText());
+					while((cobj.custZip=cobj.custZip/10)!=0)
+					{
+						++numberofDigits;
+					}
+					if(numberofDigits!=5)
+					{
+						JOptionPane.showMessageDialog(null, "Enter Valid Zip");
+					}
+					
 					cobj.nameonCard = textNameCard.getText();
+					if(cobj.nameonCard.equals(""))
+					{
+						JOptionPane.showMessageDialog(null,"No Data Entered");
+					}
+					if(!(cobj.nameonCard.matches("([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"   )))
+					{
+						JOptionPane.showMessageDialog(null, "Enter valid Name");
+					}
+					
+					int check=1;
 					cobj.cardNumber = Long.parseLong(textcardNumber.getText());
+					while((cobj.cardNumber=cobj.cardNumber/10)!=0)
+					{
+						++check;
+					}
+					if(check==1)
+					{
+						JOptionPane.showMessageDialog(null, "Enter valid card number");
+					}
+					
+					int noofDigits1=1;
 					cobj.cvv = Integer.parseInt(textCVV.getText());
+					while((cobj.cvv=cobj.cvv/10)!=0)
+					{
+						++noofDigits1;
+					}
+					if(noofDigits1!=3)
+					{
+						JOptionPane.showMessageDialog(null, "CVV must be 3 numbers");
+					}
+	
+					
 					cobj.exp = textExp.getText(); 
 					
 					// get Db connection 

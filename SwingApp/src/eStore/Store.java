@@ -12,7 +12,14 @@ public class Store
 	String dealerName;
 	boolean isnew;
 	byte[] icon;
+	boolean selected; 
 	
+	public boolean isSelected() {
+		return selected;
+	}
+	public void setSelected(boolean selected) {
+		this.selected = selected;
+	}
 	public byte[] getIcon() {
 		return icon;
 	}

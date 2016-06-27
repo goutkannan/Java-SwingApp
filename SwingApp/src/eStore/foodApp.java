@@ -1,10 +1,10 @@
 package eStore;
 
 import java.awt.EventQueue;
-
+import eStore.dbutilities;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -24,6 +24,7 @@ public class foodApp {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					hi();
 					foodApp window = new foodApp();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -33,6 +34,10 @@ public class foodApp {
 		});
 	}
 
+	public static void hi()
+	{
+		JOptionPane.showMessageDialog(null,"Hi");
+	}
 	/**
 	 * Create the application.
 	 */
@@ -45,6 +50,7 @@ public class foodApp {
 	 */
 	private void initialize() {
 		frame = new JFrame();
+		
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
@@ -68,9 +74,23 @@ public class foodApp {
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				//check for match in ID 
-				frame.dispose();
+				if (validate_login(textField.getText(),passwordField.getText()))
+				{
+					frame.setVisible(false);
+					
+					new homepage().setVisible(true);
+				}
+				
+				
+			}
+
+			private boolean validate_login(String text, String password) {
+				// TODO Auto-generated method stub
+				dbutilities.getDafaultConnection();
+				return (password.equals(dbutilities.validatepwd(text)));
 				
 			}
 		});

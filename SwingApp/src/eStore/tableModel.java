@@ -15,16 +15,14 @@ public class tableModel extends AbstractTableModel
 		this.rows = data;
 		
 	}
+	@SuppressWarnings("unchecked")
 	public Class getColumnClass(int column)
 	{
-		if(column ==4) {
-			return Icon.class;			
-		}
-		else {
+	
 			return getValueAt(0,column).getClass();
-		}
-		
 	}
+		
+	
 	@Override
 	public int getColumnCount() {
 		
@@ -46,5 +44,9 @@ public class tableModel extends AbstractTableModel
 	{
 		return this.columns[col];
 	}
+	public boolean isCellEditable(int rowIndex, int columnIndex) {
+        return columnIndex > 4;
+	}
+	
 
 }
