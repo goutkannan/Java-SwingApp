@@ -1,5 +1,7 @@
 package eStore;
 
+import java.io.InputStream;
+
 public class Store 
 {
 	String idItem;
@@ -11,14 +13,16 @@ public class Store
 	float discount;
 	String dealerName;
 	boolean isnew;
+	String icon_filename;
+	boolean selected;
 	byte[] icon;
-	boolean selected; 
+	int selectedQty;
 	
-	public boolean isSelected() {
-		return selected;
+	public int getSelectedQty() {
+		return selectedQty;
 	}
-	public void setSelected(boolean selected) {
-		this.selected = selected;
+	public void setSelectedQty(int selectedQty) {
+		this.selectedQty = selectedQty;
 	}
 	public byte[] getIcon() {
 		return icon;
@@ -79,7 +83,20 @@ public class Store
 	}
 	public void setIsnew(boolean isnew) {
 		this.isnew = isnew;
+	}
+	public String getIcon_filename() {
+		return icon_filename;
+	}
+	public void setIcon_filename(String icon_filename) {
+		this.icon_filename = icon_filename;
+	}
+	public boolean isSelected() {
+		return selected;
+	}
+	public void setSelected(boolean selected) {
+		this.selected = selected;
 	} 
+	
 	
 
 }

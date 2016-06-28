@@ -4,6 +4,8 @@ public class Orders {
 	String idOrders;
 	String idCustomer;
 	String idProduct;
+	String qty;
+	String price;
 	String shippingAddress;
 	public String getIdOrders() {
 		return idOrders;

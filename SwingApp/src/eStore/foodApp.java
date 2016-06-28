@@ -10,6 +10,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import eStore.DbInit;
 
 public class foodApp {
 
@@ -24,7 +25,7 @@ public class foodApp {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					hi();
+					
 					foodApp window = new foodApp();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
@@ -42,6 +43,7 @@ public class foodApp {
 	 * Create the application.
 	 */
 	public foodApp() {
+		DbInit db = new DbInit(); 
 		initialize();
 	}
 
@@ -75,9 +77,10 @@ public class foodApp {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
-			public void actionPerformed(ActionEvent e) {
+		public void actionPerformed(ActionEvent e)
+			{
 				//check for match in ID 
-				if (validate_login(textField.getText(),passwordField.getText()))
+			if (validate_login(textField.getText(),passwordField.getText()))
 				{
 					frame.setVisible(false);
 					
@@ -87,9 +90,10 @@ public class foodApp {
 				
 			}
 
-			private boolean validate_login(String text, String password) {
-				// TODO Auto-generated method stub
-				dbutilities.getDafaultConnection();
+			private boolean validate_login(String text, String password)
+			{
+				
+				
 				return (password.equals(dbutilities.validatepwd(text)));
 				
 			}

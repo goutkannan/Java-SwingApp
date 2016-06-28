@@ -15,10 +15,13 @@ public class tableModel extends AbstractTableModel
 		this.rows = data;
 		
 	}
-	@SuppressWarnings("unchecked")
-	public Class getColumnClass(int column)
+	@Override
+	public Class<?> getColumnClass(int column)
 	{
-	
+			if(column == 6){
+			return Boolean.class;
+
+		}
 			return getValueAt(0,column).getClass();
 	}
 		
@@ -40,12 +43,27 @@ public class tableModel extends AbstractTableModel
 		// TODO Auto-generated method stub
 		return this.rows[rowIndex][colIndex];
 	}
+	
+	@Override
+	public void setValueAt(Object value,int rowIndex, int colIndex) {
+		
+		if (colIndex ==6){
+			boolean select = (Boolean)value;
+			rows[rowIndex][colIndex] = select;
+		}
+		if (colIndex ==7){
+            int dis = (Integer)value;
+            rows[rowIndex][colIndex] = dis;
+        }
+		super.setValueAt(value, rowIndex, colIndex);
+	}
+	
 	public String getColumnName(int col)
 	{
 		return this.columns[col];
 	}
 	public boolean isCellEditable(int rowIndex, int columnIndex) {
-        return columnIndex > 4;
+        return columnIndex > 5;
 	}
 	
 
