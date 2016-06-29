@@ -58,7 +58,7 @@ public class dbutilities
 		one_store.icon_filename=p;
 		one_store.idItem="item_001";
 		one_store.inStock=true;
-		one_store.isnew=true;
+		one_store.isnew="y";
 		one_store.itemDescription="Description of Item 001";
 		one_store.itemName="Item Name 001";
 		one_store.price=(float) 4.99;
@@ -74,7 +74,7 @@ public class dbutilities
 		two_store.icon_filename=p;
 		two_store.idItem="item_002";
 		two_store.inStock=true;
-		two_store.isnew=true;
+		two_store.isnew="y";
 		two_store.itemDescription="Description of Item 002";
 		two_store.itemName="Item Name 002";
 		two_store.price=(float) 2.99;
@@ -89,7 +89,7 @@ public class dbutilities
 		three_store.icon_filename=p;
 		three_store.idItem="item_003";
 		three_store.inStock=true;
-		three_store.isnew=true;
+		three_store.isnew="y";
 		three_store.itemDescription="Description of Item 003";
 		three_store.itemName="Item Name 003";
 		three_store.price=(float) 12.99;
@@ -104,7 +104,7 @@ public class dbutilities
 		four_store.icon_filename=p;
 		four_store.idItem="item_004";
 		four_store.inStock=false;
-		four_store.isnew=true;
+		four_store.isnew="y";
 		four_store.itemDescription="Description of Item 004";
 		four_store.itemName="Item Name 004";
 		four_store.price=(float) 12.99;
@@ -172,7 +172,7 @@ public class dbutilities
 			pst.setFloat(5,storeObj.price);
 			pst.setFloat(6,storeObj.discount);
 			pst.setString(7,storeObj.dealerName);
-			pst.setBoolean(8,storeObj.isnew);
+			pst.setString(8,storeObj.isnew);
 			File filename = new File(""+storeObj.icon_filename);
 			try {
 				FileInputStream fis = new FileInputStream(filename);
@@ -239,13 +239,53 @@ public class dbutilities
 		
 		
 	}
-	
-
-	public static String validatepwd(String id)
+	public static ResultSet dealerdata()
+	{
+		ResultSet rs = null;
+		try {
+			String query="select itemID,itemName,stock,price,discount from storelist";
+			PreparedStatement pst = DbInit.conn.prepareStatement(query);
+			rs=pst.executeQuery();
+			
+			return rs;
+			
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+			return rs;
+		}
+		
+	}
+	public static String getPrivilege(String id)
+	{
+		try {
+			String query="select employeePrivilege from Employee where employeeID="+"'"+id+"'";
+			PreparedStatement pst = DbInit.conn.prepareStatement(query);
+			ResultSet rs=pst.executeQuery();
+			if(rs.next())
+				return rs.getString("employeePrivilege");
+			
+			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return null;
+	}
+	public static String validatepwd(String id,String table)
 	{
 		 
 		try {
-			String query="select password from account where customerID="+"'"+id+"'";
+			String query;
+			if(table.equals("Employee"))
+			{
+				query ="select password from " + table +" where employeeID="+"'"+id+"'";
+			}
+			else
+			{
+				query ="select password from " + table +" where customerID="+"'"+id+"'";
+			}
 			PreparedStatement pst = DbInit.conn.prepareStatement(query);
 			ResultSet rs=pst.executeQuery();
 			if(rs.next())
@@ -288,6 +328,85 @@ public class dbutilities
     	
 		}
 		 return connection;
+		
+	}
+	
+	public static void updateOrderDelivery(String order_id){
+		
+		PreparedStatement update;
+		try {
+			update = MakeConnection.getConnection("FOODSTORE").prepareStatement
+				    ("UPDATE orders SET deliveryStatus = ?, delivery = ? WHERE idOrders = ?");
+			update.setString(1, "1");
+			update.setString(2, "delivered");
+			update.setString(3, order_id);
+
+			update.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+			
+			
+	}
+	
+public static void updateNonOrderDelivery(String order_id){
+		
+		PreparedStatement update;
+		try {
+			update = MakeConnection.getConnection("FOODSTORE").prepareStatement
+				    ("UPDATE orders SET deliveryStatus = ?, delivery = ? WHERE idOrders = ?");
+			update.setString(1, "0");
+			update.setString(2, "not delivered");
+			update.setString(3, order_id);
+
+			update.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+			
+			
+	}
+	
+	
+	public static ArrayList<Orders> getOrders()
+	{
+		
+		 
+		try {
+			
+			String query="select idOrders,idCustomer,idProduct,shippingAddress,deliveryStatus,delivery from orders";
+			PreparedStatement pst = MakeConnection.getConnection("FOODSTORE").prepareStatement(query);
+			ResultSet rs=pst.executeQuery();
+			
+			ArrayList<Orders> data = new ArrayList<Orders>();
+		
+			
+				while(rs.next())
+				{
+					Orders p = new Orders();
+					p.idOrders = rs.getString("idOrders"); 
+					p.idCustomer = rs.getString("idCustomer");
+					p.idProduct = rs.getString("idProduct");
+					p.shippingAddress = rs.getString("shippingAddress");
+					p.deliveryStatus = rs.getBoolean("deliveryStatus");
+					p.delivery = rs.getString("delivery");
+					data.add(p);
+					
+				}
+			
+				return data; 
+			}
+		
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return null;
+		
 		
 	}
 		

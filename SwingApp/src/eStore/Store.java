@@ -12,7 +12,7 @@ public class Store
 	float price;
 	float discount;
 	String dealerName;
-	boolean isnew;
+	String isnew;
 	String icon_filename;
 	boolean selected;
 	byte[] icon;
@@ -78,10 +78,10 @@ public class Store
 	public void setDealerName(String dealerName) {
 		this.dealerName = dealerName;
 	}
-	public boolean isIsnew() {
+	public String isIsnew() {
 		return isnew;
 	}
-	public void setIsnew(boolean isnew) {
+	public void setIsnew(String isnew) {
 		this.isnew = isnew;
 	}
 	public String getIcon_filename() {

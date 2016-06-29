@@ -38,7 +38,7 @@ public class Cdetails extends JFrame {
 	private JPanel contentPane;
 	private JTextField textFName;
 	private JTextField textLName;
-	private JTextField textEmail;
+	private JTextField textuserid;
 	
 	private JTextField textNameCard;
 	private JTextField textZip;
@@ -50,21 +50,6 @@ public class Cdetails extends JFrame {
 	private JTextField textState;
 	private JTextPane textAddress;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Cdetails frame = new Cdetails();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
@@ -83,7 +68,7 @@ public class Cdetails extends JFrame {
 		JLabel lblLastName = new JLabel("Last Name ");
 		lblLastName.setBounds(43, 97, 102, 22);
 		
-		JLabel lblEmailId = new JLabel("Email ID ");
+		JLabel lblEmailId = new JLabel("User ID ");
 		lblEmailId.setBounds(43, 149, 102, 22);
 		
 		JLabel lblFirstName_1 = new JLabel("Password");
@@ -123,10 +108,10 @@ public class Cdetails extends JFrame {
 		textLName.setBounds(181, 97, 179, 22);
 		textLName.setColumns(10);
 		
-		textEmail = new JTextField();
-		textEmail.setToolTipText("Enter emailId/Login Id");
-		textEmail.setBounds(181, 149, 179, 22);
-		textEmail.setColumns(10);
+		textuserid = new JTextField();
+		textuserid.setToolTipText("Enter Login Id");
+		textuserid.setBounds(181, 149, 179, 22);
+		textuserid.setColumns(10);
 		
 
 		
@@ -187,16 +172,16 @@ public class Cdetails extends JFrame {
 						JOptionPane.showMessageDialog(null, "Enter only aplhabets");
 					}
 
-					String EMAIL_REGEX = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-					cobj.custID = textEmail.getText();
+					//String EMAIL_REGEX = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
+					cobj.custID = textuserid.getText();
 					if(cobj.custID.equals(""))
 					{
 						JOptionPane.showMessageDialog(null, "Enter valid email address");
 					}
-					if(!(cobj.custID.matches(EMAIL_REGEX)))
+					/*if(!(cobj.custID.matches(EMAIL_REGEX)))
 					{
 						JOptionPane.showMessageDialog(null, "Enter valid email address");
-					}
+					}*/
 
 					cobj.custAddress = textAddress.getText();
 					if(cobj.custAddress.equals(""))
@@ -272,11 +257,13 @@ public class Cdetails extends JFrame {
 					// get Db connection 
 					
 					dbutilities db = new dbutilities();
-					db.getDafaultConnection(); 
+				
 					int err = db.updateCustomerDetails(cobj);
 					if (err==1)
 					{
 						JOptionPane.showMessageDialog(contentPane,"Welcome aboard "+ cobj.custID +" your account has been registered");
+						contentPane.setVisible(false);
+						
 					}
 					else if(err==2)
 					{
@@ -322,7 +309,7 @@ public class Cdetails extends JFrame {
 		contentPane.add(lblLastName);
 		contentPane.add(lblEmailId);
 		contentPane.add(lblFirstName_1);
-		contentPane.add(textEmail);
+		contentPane.add(textuserid);
 		contentPane.add(textLName);
 		contentPane.add(textFName);
 		contentPane.add(passwordField);

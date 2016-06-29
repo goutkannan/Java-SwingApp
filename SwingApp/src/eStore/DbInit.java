@@ -20,9 +20,7 @@ public class DbInit {
 			conn = MakeConnection.getConnection("FOODSTORE");
 			createTables(conn);
 			dbutilities.enterStoreListValues();
-			
-			
-			
+
 		
 		}
 		
@@ -32,15 +30,15 @@ public class DbInit {
 
 		String createDatabaseQuery = "CREATE DATABASE IF NOT EXISTS FOODSTORE";
 		String useDB = "USE FOODSTORE";
-		String createTablespaceCommand1 = "DROP TABLESPACE IF EXISTS FOODSTORE ;";
-		String createTablespaceCommand2 = " CREATE TABLESPACE FOODSTORE ADD DATAFILE 'FOODSTORE.ibd';";
+		//String createTablespaceCommand1 = "DROP TABLESPACE IF EXISTS FOODSTORE ;";
+		//String createTablespaceCommand2 = " CREATE TABLESPACE FOODSTORE ADD DATAFILE 'FOODSTORE.ibd';";
 		Statement statement = null;
 		try {
 			statement = conn.createStatement();
 			statement.executeUpdate(createDatabaseQuery);
 			statement.executeUpdate(useDB);
-			statement.executeUpdate(createTablespaceCommand1);
-			statement.executeUpdate(createTablespaceCommand2);
+			//statement.executeUpdate(createTablespaceCommand1);
+			//statement.executeUpdate(createTablespaceCommand2);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -79,8 +77,8 @@ public class DbInit {
 		statement.executeUpdate(createTableAccountQuery2);
 			
 			
-			String createTableOrdersQuery1 = "DROP TABLE IF EXISTS orders;";
-			statement.executeUpdate(createTableOrdersQuery1);
+			//String createTableOrdersQuery1 = "DROP TABLE IF EXISTS orders;";
+			//statement.executeUpdate(createTableOrdersQuery1);
 			
 			String createTableOrdersQuery2 = 
 								"CREATE TABLE IF NOT EXISTS orders ("
@@ -88,6 +86,8 @@ public class DbInit {
 			  +"idCustomer varchar(45) NOT NULL,"
 			  +"idproduct varchar(45) NOT NULL,"
 			  +"shippingAddress varchar(500) NOT NULL,"
+			  +"deliveryStatus TINYINT,"
+			  +"delivery varchar(500) NOT NULL,"
 			  +"PRIMARY KEY (idOrders),"
 			  +"UNIQUE KEY idOrders_UNIQUE (idOrders)"
 			  +");";
@@ -116,8 +116,8 @@ public class DbInit {
 
 			statement.executeUpdate(createTableStoreListQuery2);
 			
-			String createTableEmployeeQuery1 = "DROP TABLE IF EXISTS employee;";
-			statement.executeUpdate(createTableEmployeeQuery1);	
+			/*String createTableEmployeeQuery1 = "DROP TABLE IF EXISTS employee;";
+			statement.executeUpdate(createTableEmployeeQuery1);*/	
 			
 			String createTableEmployeeQuery2 = 
 					"CREATE TABLE IF NOT EXISTS employee ("
@@ -140,6 +140,7 @@ public class DbInit {
 								+"ticketAssignee varchar(50) NOT NULL,"
 								+"ticketDescription varchar(500) NOT NULL,"
 								+"ticketStatus varchar(20) NOT NULL,"
+								+"ticketSolution varchar(500),"
 								+"PRIMARY KEY (ticketID),"
 								+"UNIQUE KEY ticketID_UNIQUE (ticketID)"
 								+ ");";

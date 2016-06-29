@@ -35,10 +35,7 @@ public class foodApp {
 		});
 	}
 
-	public static void hi()
-	{
-		JOptionPane.showMessageDialog(null,"Hi");
-	}
+
 	/**
 	 * Create the application.
 	 */
@@ -80,21 +77,48 @@ public class foodApp {
 		public void actionPerformed(ActionEvent e)
 			{
 				//check for match in ID 
-			if (validate_login(textField.getText(),passwordField.getText()))
+			if(textField.getText().contains("@foods"))
+			{
+				if (validate_login(textField.getText(),passwordField.getText(),"Employee"))
 				{
-					frame.setVisible(false);
-					
-					new homepage().setVisible(true);
+					String pv = dbutilities.getPrivilege(textField.getText()); 
+					if (pv.equals("DL")) //Dealer
+					{
+						frame.setVisible(false);
+						
+						dealerUI dui =  new dealerUI(textField.getText()); 
+						dui.setVisible(true);
+					}
+					else if(pv.equals("DA")) //Delivery admin
+					{
+						frame.setVisible(false);
+						deliveryUI dl = new deliveryUI();
+						dl.setVisible(true);
+						
+					}
+					else if (pv.equals("SU")) //Support
+					{
+						
+					}
 				}
-				
-				
+			}
+			else
+			{
+				if (validate_login(textField.getText(),passwordField.getText(),"Account"))
+					{
+						frame.setVisible(false);
+						
+						new homepage(textField.getText()).setVisible(true);
+					}
+					
+					
+				}
 			}
 
-			private boolean validate_login(String text, String password)
+			private boolean validate_login(String text,String password,String type)
 			{
 				
-				
-				return (password.equals(dbutilities.validatepwd(text)));
+				return (password.equals(dbutilities.validatepwd(text,type )));
 				
 			}
 		});

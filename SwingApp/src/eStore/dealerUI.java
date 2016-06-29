@@ -1,120 +1,175 @@
 package eStore;
 
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+import java.awt.Image;
+
+import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+
+import net.proteanit.sql.DbUtils;
+
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JTextArea;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JSeparator;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
+import java.awt.event.ActionEvent;
 
-public class dealerUI extends JPanel {
-	private JTextField textid;
-	private JTextField textItem;
-	private JTextField textQty;
+public class dealerUI extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textidItem;
+	private JTextField textitemName;
 	private JTextField textPrice;
+	private JTextField textQty;
+	private JTextField textDescription;
 	private JTextField textDiscount;
-	private JTextField textExpDate;
+	private JTextField texticonFilename;
 	private JTable table;
+	private JFileChooser fc;
+
+	
 
 	/**
-	 * Create the panel.
+	 * Create the frame.
 	 */
-	public dealerUI() {
-		setLayout(null);
+	public dealerUI(String user) {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 879, 633);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("ItemId");
-		lblNewLabel.setBounds(45, 85, 90, 31);
-		add(lblNewLabel);
+		JLabel lblWelcome = new JLabel("Welcome "+user);
+		lblWelcome.setBounds(12, 13, 327, 29);
+		contentPane.add(lblWelcome);
 		
-		textid = new JTextField();
-		textid.setBounds(170, 89, 193, 22);
-		add(textid);
-		textid.setColumns(10);
+		textidItem = new JTextField();
+		textidItem.setBounds(146, 55, 116, 22);
+		contentPane.add(textidItem);
+		textidItem.setColumns(10);
+		
+		JLabel lblNewLabel = new JLabel("Item ID");
+		lblNewLabel.setBounds(22, 58, 56, 16);
+		contentPane.add(lblNewLabel);
 		
 		JLabel lblNewLabel_1 = new JLabel("Item Name");
-		lblNewLabel_1.setBounds(45, 163, 90, 16);
-		add(lblNewLabel_1);
+		lblNewLabel_1.setBounds(22, 111, 112, 16);
+		contentPane.add(lblNewLabel_1);
 		
-		textItem = new JTextField();
-		textItem.setBounds(170, 160, 193, 22);
-		add(textItem);
-		textItem.setColumns(10);
+		textitemName = new JTextField();
+		textitemName.setBounds(146, 108, 116, 22);
+		contentPane.add(textitemName);
+		textitemName.setColumns(10);
 		
-		textQty = new JTextField();
-		textQty.setBounds(170, 303, 193, 22);
-		add(textQty);
-		textQty.setColumns(10);
-		
-		JLabel lblNewLabel_2 = new JLabel("Description");
-		lblNewLabel_2.setBounds(45, 232, 90, 16);
-		add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Qty");
-		lblNewLabel_3.setBounds(45, 306, 56, 16);
-		add(lblNewLabel_3);
-		
-		JTextArea textDescription = new JTextArea();
-		textDescription.setBounds(170, 210, 193, 66);
-		add(textDescription);
-		
-		JLabel lblNewLabel_4 = new JLabel("Price");
-		lblNewLabel_4.setBounds(45, 377, 56, 16);
-		add(lblNewLabel_4);
+		JLabel lblNewLabel_2 = new JLabel("Price");
+		lblNewLabel_2.setBounds(385, 58, 85, 16);
+		contentPane.add(lblNewLabel_2);
 		
 		textPrice = new JTextField();
-		textPrice.setBounds(170, 374, 193, 22);
-		add(textPrice);
+		textPrice.setBounds(509, 55, 116, 22);
+		contentPane.add(textPrice);
 		textPrice.setColumns(10);
 		
-		JLabel lblDiscount = new JLabel("Discount");
-		lblDiscount.setBounds(48, 448, 56, 16);
-		add(lblDiscount);
+		JLabel lblNewLabel_3 = new JLabel("Quantity");
+		lblNewLabel_3.setBounds(385, 111, 85, 16);
+		contentPane.add(lblNewLabel_3);
+		
+		textQty = new JTextField();
+		textQty.setText("1");
+		textQty.setBounds(509, 108, 116, 22);
+		contentPane.add(textQty);
+		textQty.setColumns(10);
+		
+		JLabel lblNewLabel_4 = new JLabel("Description");
+		lblNewLabel_4.setBounds(22, 159, 75, 16);
+		contentPane.add(lblNewLabel_4);
+		
+		textDescription = new JTextField();
+		textDescription.setBounds(146, 156, 116, 22);
+		contentPane.add(textDescription);
+		textDescription.setColumns(10);
+		
+		JLabel lblNewLabel_5 = new JLabel("Discount");
+		lblNewLabel_5.setBounds(385, 159, 85, 16);
+		contentPane.add(lblNewLabel_5);
 		
 		textDiscount = new JTextField();
-		textDiscount.setBounds(170, 445, 193, 22);
-		add(textDiscount);
+		textDiscount.setText("0");
+		textDiscount.setBounds(509, 156, 116, 22);
+		contentPane.add(textDiscount);
 		textDiscount.setColumns(10);
 		
-		JLabel lblNewLabel_5 = new JLabel("Exp. Date");
-		lblNewLabel_5.setBounds(48, 520, 56, 16);
-		add(lblNewLabel_5);
+		JButton saveButton = new JButton("Save Details");
+		saveButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!textidItem.getText().isEmpty())
+				{	
+					Store s = new Store();
+					s.idItem = textidItem.getText(); 
+					s.itemName = textitemName.getText();
+					s.dealerName = user; 
+					s.itemDescription= textDescription.getText();
+					s.price = Float.parseFloat(textPrice.getText());
+					s.discount = Float.parseFloat(textDiscount.getText());
+					s.icon_filename = texticonFilename.getText(); 
+					s.stock = Integer.parseInt(textQty.getText());
+					s.isnew ="Y";
+					
+					dbutilities.updateStoreListDetails(s);
+				}
+				table.setModel(DbUtils.resultSetToTableModel(dbutilities.dealerdata() ));
+				
+				
+			
+			
+			
+			}
+		});
+		saveButton.setBounds(695, 55, 125, 25);
+		contentPane.add(saveButton);
 		
-		textExpDate = new JTextField();
-		textExpDate.setBounds(170, 517, 193, 22);
-		add(textExpDate);
-		textExpDate.setColumns(10);
+		JLabel lblIcon = new JLabel("Icon");
+		lblIcon.setBounds(22, 202, 56, 16);
+		contentPane.add(lblIcon);
 		
-		JButton btnUpload = new JButton("Upload");
-		btnUpload.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				Store stockobj =  new Store(); 
-				stockobj.idItem = textid.getText();
-				stockobj.itemName = textItem.getText();
-				stockobj.itemDescription = textDescription.getText(); 
+		texticonFilename = new JTextField();
+		texticonFilename.setBounds(146, 199, 176, 22);
+		contentPane.add(texticonFilename);
+		texticonFilename.setColumns(10);
+		fc = new JFileChooser(); 
+		fc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+		
+		JButton openbutton = new JButton("browse");
+		openbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) 
+			{
+				
+		            int returnVal = fc.showOpenDialog(dealerUI.this);
+
+		            if (returnVal == JFileChooser.APPROVE_OPTION) {
+		                File file = fc.getSelectedFile();
+		                texticonFilename.setText(file.getAbsolutePath().toString());
+		            }
 				
 			}
 		});
-		btnUpload.setBounds(170, 595, 97, 25);
-		add(btnUpload);
-		
-		JButton btnClose = new JButton("Close");
-		btnClose.setBounds(290, 595, 97, 25);
-		add(btnClose);
-		
-		JSeparator separator = new JSeparator();
-		separator.setBounds(55, 0, 489, 666);
-		add(separator);
+		openbutton.setBounds(365, 202, 97, 25);
+		contentPane.add(openbutton);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(556, 40, 383, 574);
-		add(scrollPane);
+		scrollPane.setBounds(12, 282, 837, 291);
+		contentPane.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-
 	}
 }

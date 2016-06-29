@@ -4,9 +4,39 @@ public class Orders {
 	String idOrders;
 	String idCustomer;
 	String idProduct;
-	String qty;
-	String price;
 	String shippingAddress;
+	String delivery;
+	float Price;
+	int qty;
+	Boolean deliveryStatus;
+	
+	public float getPrice() {
+		return Price;
+	}
+	public void setPrice(float price) {
+		Price = price;
+	}
+	public int getQty() {
+		return qty;
+	}
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+	
+	public String getDelivery() {
+		return delivery;
+	}
+	public void setDelivery(String delivery) {
+		this.delivery = delivery;
+	}
+	
+	
+	public Boolean getDeliveryStatus() {
+		return deliveryStatus;
+	}
+	public void setDeliveryStatus(Boolean deliveryStatus) {
+		this.deliveryStatus = deliveryStatus;
+	}
 	public String getIdOrders() {
 		return idOrders;
 	}
