@@ -2,7 +2,7 @@ package eStore;
 
 public class SupportTicket 
 {
-	String supportTicketID;
+	int supportTicketID;
 	String problemDetails;
 	String reporter;
 	String assignee;
@@ -14,10 +14,10 @@ public class SupportTicket
 	public void setStatus(String status) {
 		this.status = status;
 	}
-	public String getSupportTicketID() {
+	public int getSupportTicketID() {
 		return supportTicketID;
 	}
-	public void setSupportTicketID(String supportTicketID) {
+	public void setSupportTicketID(int supportTicketID) {
 		this.supportTicketID = supportTicketID;
 	}
 	public String getProblemDetails() {

@@ -32,6 +32,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
+import javax.swing.SwingUtilities;
 //INSERT INTO `inventory`.`account` (`customeID`, `customerFName`, `customerLName`, `customerAddress`, `addressState`, `zip`, `nameonCard`, `cardNumber`, `CVV`, `expiryDate`, `password`) VALUES ('gout.kannan', 'Goutham', 'Kannan', '2801 S King Dr', 'IL', '60616', 'Goutham Kannan', '525252525252525252', '100', '02/20', 'yo');
 public class Cdetails extends JFrame {
 
@@ -148,35 +149,51 @@ public class Cdetails extends JFrame {
 			public void actionPerformed(ActionEvent arg0) 
 			{
 			// Needs to insert data into the customer table  
-			
+				String msg[]=new String[25];
+				int i=0,flag=0;
 				try {
 					Customer cobj= new Customer(); 
 					
 					cobj.custFName = textFName.getText();
 					if(cobj.custFName.equals(""))
 					{
-						JOptionPane.showMessageDialog(null,"No Data Entered");
+						msg[i]="No data entered for first name"+"\n";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null,"No Data Entered");
 					}
 					if(!(cobj.custFName.matches("[a-zA-Z]*")))
 					{
-						JOptionPane.showMessageDialog(null, "Enter only aplhabets");
+						msg[i]="Enter only alphabets for first name"+"\n";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null, "Enter only alphabets");
 					}
 
 					cobj.custLName  = textLName.getText();
 					if(cobj.custLName.equals(""))
 					{
-						JOptionPane.showMessageDialog(null,"No Data Entered");
+						msg[i]="No data entered for last name"+"\n";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null,"No Data Entered");
 					}
-					if(!(cobj.custLName.matches("[a-zA-z]+([ '-][a-zA-Z]+)*")))
+					if(!(cobj.custLName.matches("[a-zA-Z]*")))
 					{
-						JOptionPane.showMessageDialog(null, "Enter only aplhabets");
+						msg[i]="Enter only alphabets for last name"+"\n";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null, "Enter only alphabets");
 					}
 
 					//String EMAIL_REGEX = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
 					cobj.custID = textuserid.getText();
 					if(cobj.custID.equals(""))
 					{
-						JOptionPane.showMessageDialog(null, "Enter valid email address");
+						msg[i]="No data entered for email address"+"\n";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null, "Enter valid email address");
 					}
 					/*if(!(cobj.custID.matches(EMAIL_REGEX)))
 					{
@@ -186,24 +203,30 @@ public class Cdetails extends JFrame {
 					cobj.custAddress = textAddress.getText();
 					if(cobj.custAddress.equals(""))
 					{
-						JOptionPane.showMessageDialog(null,"No Data Entered");
-					}
-					if(!(cobj.custAddress.matches("\\d+\\s+([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)" )))
-					{
-						JOptionPane.showMessageDialog(null, "Enter valid Address");
+						
+						msg[i]="Enter valid address,";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null,"No Data Entered");
 					}
 
 					cobj.custState = textState.getText();
 					if(cobj.custState.equals(""))
 					{
-						JOptionPane.showMessageDialog(null,"No Data Entered");
+						msg[i]="No Data entered for state"+"\n";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null,"No Data Entered");
 					}
 					if(!(cobj.custState.matches("([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"   )))
 					{
-						JOptionPane.showMessageDialog(null, "Enter valid State");
+						msg[i]="Enter valid state"+"\n";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null, "Enter valid State");
 					}
 
-					if(passwordField.getPassword() == passwordField_1.getPassword())
+					if(passwordField.getText().equals(passwordField_1.getText()))
 						cobj.custPswd = passwordField.getPassword().toString();
 					else
 						cobj.custPswd="temp";
@@ -216,17 +239,27 @@ public class Cdetails extends JFrame {
 					}
 					if(numberofDigits!=5)
 					{
-						JOptionPane.showMessageDialog(null, "Enter Valid Zip");
+
+						msg[i]="Enter valid zip"+"\n";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null, "Enter Valid Zip");
 					}
 					
 					cobj.nameonCard = textNameCard.getText();
 					if(cobj.nameonCard.equals(""))
 					{
-						JOptionPane.showMessageDialog(null,"No Data Entered");
+						msg[i]="No Data entered for name on card"+"\n";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null,"No Data Entered");
 					}
 					if(!(cobj.nameonCard.matches("([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"   )))
 					{
-						JOptionPane.showMessageDialog(null, "Enter valid Name");
+						msg[i]="Enter valid name on card"+"\n";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null, "Enter valid Name");
 					}
 					
 					int check=1;
@@ -235,9 +268,12 @@ public class Cdetails extends JFrame {
 					{
 						++check;
 					}
-					if(check==1)
+					if(check==1||check!=16)
 					{
-						JOptionPane.showMessageDialog(null, "Enter valid card number");
+						msg[i]="Enter valid card number"+"\n";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null, "Enter valid card number");
 					}
 					
 					int noofDigits1=1;
@@ -248,12 +284,37 @@ public class Cdetails extends JFrame {
 					}
 					if(noofDigits1!=3)
 					{
-						JOptionPane.showMessageDialog(null, "CVV must be 3 numbers");
+						msg[i]="CVV should be only 3 numbers"+"\n";
+						i++;
+						++flag;
+						//JOptionPane.showMessageDialog(null, "CVV must be 3 numbers");
+					}
+					cobj.exp = textExp.getText();
+					if(!(cobj.exp.matches("\\d{2}\\/\\d{2}")))
+					{
+						msg[i]="Enter correct date"+"\n";
+						i++;
+						++flag;
 					}
 	
-					
-					cobj.exp = textExp.getText(); 
-					
+					if(msg.length>1)
+					{
+						StringBuilder strBuilder = new StringBuilder();
+						for (int j = 0; j < msg.length; j++) {
+							if(msg[j]!=null)
+								strBuilder.append(msg[j]);
+						}
+						String newString = strBuilder.toString();
+						if(flag!=0)
+						JOptionPane.showMessageDialog(null,newString);
+					}
+					cobj.exp = textExp.getText();
+					if(!(cobj.exp.matches("\\d{2}\\/\\d{4}")))
+					{
+						msg[i]="Enter correct date"+"\n";
+						i++;
+						++flag;
+					}
 					// get Db connection 
 					
 					dbutilities db = new dbutilities();
@@ -263,7 +324,10 @@ public class Cdetails extends JFrame {
 					{
 						JOptionPane.showMessageDialog(contentPane,"Welcome aboard "+ cobj.custID +" your account has been registered");
 						contentPane.setVisible(false);
-						
+						JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(contentPane);
+			        	frame.dispose();
+
+			        	new foodApp().frame.setVisible(true);
 					}
 					else if(err==2)
 					{

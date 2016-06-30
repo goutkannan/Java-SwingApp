@@ -20,6 +20,7 @@ public class DbInit {
 			conn = MakeConnection.getConnection("FOODSTORE");
 			createTables(conn);
 			dbutilities.enterStoreListValues();
+			dbutilities.initEmployeeDetails();
 
 		
 		}
@@ -134,10 +135,11 @@ public class DbInit {
 
 			//String createTableTicketQuery1 = "DROP TABLE IF EXISTS ticket;";
 			//statement.executeUpdate(createTableTicketQuery1);
+			
 			String createTableTicketQuery2 = 
 					"CREATE TABLE IF NOT EXISTS ticket ("
-								+"ticketID varchar(50) NOT NULL,"
-								+"ticketAssignee varchar(50) NOT NULL,"
+								+"ticketID int NOT NULL AUTO_INCREMENT,"
+								+"ticketAssignee varchar(50) NOT NULL DEFAULT 'default',"
 								+"ticketReporter varchar(50) NOT NULL,"
 								+"ticketDescription varchar(500) NOT NULL,"
 								+"ticketStatus varchar(20) NOT NULL,"

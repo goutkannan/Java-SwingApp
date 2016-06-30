@@ -135,7 +135,7 @@ public class SupportUI extends JFrame
 			}
 			else
 			{
-				supportTicketID.setText(s.get(i).getSupportTicketID() );
+				supportTicketID.setText(String.valueOf(s.get(i).getSupportTicketID()) );
 				problemDetails.setText(s.get(i).getProblemDetails() );
 				reporter.setText(s.get(i).reporter);
 				assignee.setText(user);
@@ -164,9 +164,9 @@ public class SupportUI extends JFrame
 			btnShowNext.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent arg0) {
 					i++;
-					if(s.size()<i)
+					if(s.size()>i)
 					{
-						supportTicketID.setText(s.get(i).getSupportTicketID() );
+						supportTicketID.setText(String.valueOf(s.get(i).getSupportTicketID() ));
 						problemDetails.setText(s.get(i).getProblemDetails() );
 						reporter.setText(s.get(i).reporter);
 						assignee.setText(user);

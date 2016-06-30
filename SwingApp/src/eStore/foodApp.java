@@ -106,6 +106,14 @@ public class foodApp {
 						sui.setVisible(true);
 						
 					}
+					else if (pv.equals("MR")) //Support
+					{
+						frame.setVisible(false);
+						managerUI mui = new managerUI();
+						mui.setVisible(true);
+						
+					}
+					
 					else
 					{
 						JOptionPane.showMessageDialog(frame, "Sorry, User ID/Password doesn't match ");

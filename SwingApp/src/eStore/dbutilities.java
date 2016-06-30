@@ -24,8 +24,38 @@ import eStore.Customer;
 public class dbutilities 
 {
 	static Connection connection =null;
-	
-	public void updateEmployeeDetails(Employee empObj){
+	public static void initEmployeeDetails()
+	{
+		Employee empObj = new Employee();
+		empObj.employeeID= "emp1@foods.com";
+		empObj.emplyeeName = "Employee1";
+		empObj.employeePrivilege = "DL";
+		empObj.password="emp1";
+		updateEmployeeDetails(empObj);
+		
+		empObj.employeeID= "emp2@foods.com";
+		empObj.emplyeeName = "Employee2";
+		empObj.employeePrivilege = "DA";
+		empObj.password="emp2";
+		updateEmployeeDetails(empObj);
+		
+		empObj.employeeID= "emp3@foods.com";
+		empObj.emplyeeName = "Employee3";
+		empObj.employeePrivilege = "SU";
+		empObj.password="emp3";
+		updateEmployeeDetails(empObj);
+		
+		empObj.employeeID= "emp4@foods.com";
+		empObj.emplyeeName = "Employee4";
+		empObj.employeePrivilege = "MR";
+		empObj.password="emp4";
+		updateEmployeeDetails(empObj);
+		
+		
+		
+		
+	}
+	public static void updateEmployeeDetails(Employee empObj){
 		String insertIntoEmployeeQuery = "INSERT INTO employee VALUES "
 				+ "(?, ?,?, ?);";
 		try{
@@ -423,7 +453,36 @@ public static void updateNonOrderDelivery(String order_id){
 				while(rs.next())
 				{
 					SupportTicket n=new SupportTicket();
-					n.supportTicketID=rs.getString("ticketID");
+					n.supportTicketID=rs.getInt("ticketID");
+					n.problemDetails=rs.getString("ticketDescription");
+					n.reporter=rs.getString("ticketReporter");
+					res.add(n);
+				}
+				return res;
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return null;
+		
+	}
+	
+	public static ArrayList<SupportTicket> getSupportTicketList()
+	{
+		try
+		{
+			String query="select ticketID,ticketDescription,ticketReporter from ticket where ticketStatus='Open'";
+			PreparedStatement pst = DbInit.conn.prepareStatement(query);
+			ResultSet rs=pst.executeQuery();
+			
+			ArrayList<SupportTicket> res = new ArrayList<SupportTicket>();
+		
+			
+				while(rs.next())
+				{
+					SupportTicket n=new SupportTicket();
+					n.supportTicketID=rs.getInt("ticketID");
 					n.problemDetails=rs.getString("ticketDescription");
 					n.reporter=rs.getString("ticketReporter");
 					res.add(n);
@@ -454,5 +513,91 @@ public static void updateNonOrderDelivery(String order_id){
 			e.printStackTrace();
 		}
 	}
+	public static void createSupportTicket(String reporter,String query)
+	{
+		String insertIntoSupportQuery = "insert into ticket (ticketReporter, ticketDescription, ticketStatus)"
+		        + " values (?, ?, ?)";
 		
+		try{
+		PreparedStatement pst = DbInit.conn.prepareStatement(insertIntoSupportQuery);
+		pst.setString(1, reporter);
+		pst.setString(2, query);
+		pst.setString(3, "Open");
+		
+		pst.executeUpdate();
+		}
+		catch (SQLIntegrityConstraintViolationException  e) 
+		{	
+		e.printStackTrace();
+		}
+		catch (SQLException e) {
+		e.printStackTrace();
+		}
+	}
+	
+	public static List<String>  getEmployees(){
+		 List<String> employees = new ArrayList<String>();
+		 try {
+				String query="select employeeID from employee ";
+				PreparedStatement pst = DbInit.conn.prepareStatement(query);
+				ResultSet rs=pst.executeQuery();
+				while(rs.next())
+					employees.add(rs.getString("employeeID"));
+				
+				
+			}
+			catch(Exception ex)
+			{
+				ex.printStackTrace();
+			}
+		 
+		 return employees; 
+	}
+	public static String getAddress(String user) {
+		try {
+			String query="select customerAddress, addressState,zip  from account where customerID="+"'"+user+"'";
+			PreparedStatement pst = DbInit.conn.prepareStatement(query);
+			ResultSet rs=pst.executeQuery();
+			if(rs.next())
+				return (rs.getString("customeraddress")+'\n'+rs.getString("addressState")+'\n'+rs.getString("zip")); 
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		
+		return null;
+	}
+	public static void setOrders(Orders orders) {
+		// TODO Auto-generated method stub
+		String insertIntoSupportQuery = "insert into orders "
+		        + " values (?, ?,?, ?,?,?)";
+		
+		try{
+			PreparedStatement pst = DbInit.conn.prepareStatement(insertIntoSupportQuery);
+			pst.setString(1, orders.idOrders);
+			pst.setString(2, orders.idCustomer);
+			pst.setString(3, orders.idProduct);
+			pst.setString(4, orders.shippingAddress);
+			
+			pst.setString(5, null);
+			pst.setString(6, "Standard");
+		
+			pst.executeUpdate();
+		}
+		catch (SQLIntegrityConstraintViolationException  e) 
+		{	
+		e.printStackTrace();
+		}
+		catch (SQLException e) {
+		e.printStackTrace();
+		}
+	}
+
+	
+	
+	
+	
+			
+				
 }

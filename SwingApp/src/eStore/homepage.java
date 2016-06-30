@@ -55,7 +55,7 @@ public class homePage extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
-	
+	static int i=1;
 	// new code 
 	private JTable Checkouttable;
 	private JTabbedPane tabbedPane;
@@ -114,6 +114,8 @@ public class homePage extends JFrame {
 	 * Create the frame.
 	 */
 	public homePage(String user) {
+		
+		String shipping_address =  dbutilities.getAddress(user); 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1182, 884);
 		contentPane = new JPanel();
@@ -127,7 +129,7 @@ public class homePage extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panel.setForeground(new Color(0, 0, 0));
-		tabbedPane.addTab("New tab", null, panel, null);
+		tabbedPane.addTab("Shop", null, panel, null);
 		panel.setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -156,8 +158,12 @@ public class homePage extends JFrame {
 		/// new code 
 		JPanel Checkoutpanel = new JPanel();
 		Checkoutpanel.setForeground(new Color(0, 0, 0));
+		
 		tabbedPane.addTab("Checkout", null, Checkoutpanel, null);
 		Checkoutpanel.setLayout(null);
+		
+		
+		
 		JScrollPane Scrollpanel1 = new JScrollPane();
 		Scrollpanel1.setBounds(24, 13, 858, 500);
 		Checkoutpanel.add(Scrollpanel1);
@@ -235,10 +241,6 @@ public class homePage extends JFrame {
 		JPanel panel_3 = new JPanel();
 		tabbedPane_1.addTab("Debit", null, panel_3, null);
 		
-		JButton btnMakePayment = new JButton("Make Payment");
-		btnMakePayment.setBounds(805, 282, 189, 43);
-		Paymentpanel.add(btnMakePayment);
-		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(805, 365, 189, 43);
 		Paymentpanel.add(btnCancel);
@@ -259,9 +261,22 @@ public class homePage extends JFrame {
 
 		// new code end//
 		
-		JButton btnCheckout = new JButton("checkout");
+		JButton btnCheckout = new JButton("Checkout");
 		btnCheckout.setBounds(929, 162, 97, 25);
 		panel.add(btnCheckout);
+		
+		JButton btnHelp = new JButton("Help");
+		btnHelp.setBounds(929, 222, 97, 25);
+		panel.add(btnHelp);
+		btnHelp.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				
+				new helpUI(user).setVisible(true);
+	        	//new foodApp().frame.setVisible(true);
+			}
+			});
+		
+		
 		ArrayList<Orders> myList = new ArrayList<Orders>(); 
 		
 		btnCheckout.addActionListener(new ActionListener() {
@@ -339,11 +354,30 @@ public class homePage extends JFrame {
 		showtable();
 		
 		
-		// Function which i tried to use for populating data in checkout tab without button click. But not working.
-		showCheckout();
+		// FunctioArrayList<Orders> orderData n which i tried to use for populating data in checkout tab without button click. But not working.
+		ArrayList<Orders> orderData = showCheckout();
+
+		JButton btnMakePayment = new JButton("Make Payment");
+		btnMakePayment.setBounds(805, 282, 189, 43);
+		Paymentpanel.add(btnMakePayment);
+		 
+  
+		btnMakePayment.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				for(int j=0;j<myList.size();j++)
+				{
+					myList.get(j).idOrders = "Ord"+String.valueOf(i); 
+					myList.get(j).idCustomer = user;
+					myList.get(j).shippingAddress = shipping_address; 
+					
+					dbutilities.setOrders(myList.get(j));
+					
+				}
+			}
+			});
 	}
 	
-	public  void showCheckout()
+	public  ArrayList<Orders> showCheckout()
 	{
 			
 		String[] cols = {"Product Name","Price","Qty" };
@@ -376,6 +410,7 @@ public class homePage extends JFrame {
 		{
 		    model.addRow(new String[] {p.idProduct, String.valueOf(p.qty), String.valueOf(p.Price)});
 		}
+		return myList;
 	}
 	
 	class MyItemListener implements ItemListener   
