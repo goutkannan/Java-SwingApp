@@ -17,7 +17,7 @@ import java.awt.Font;
 
 public class foodApp {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField textField;
 	private JPasswordField passwordField;
 

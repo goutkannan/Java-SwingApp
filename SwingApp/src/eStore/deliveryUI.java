@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.JScrollPane;
 import javax.swing.AbstractButton;
@@ -38,18 +39,7 @@ public class deliveryUI extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					deliveryUI frame = new deliveryUI();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+
 	
 	public  void showtable()
 	{
@@ -132,7 +122,12 @@ public class deliveryUI extends JFrame {
 		btnCancel.addActionListener(new ActionListener() {
 	        @Override
 			public void actionPerformed(ActionEvent e) {
-	        	JOptionPane.showMessageDialog(null, "My Goodness, this is so concise");
+	        	contentPane.setVisible(false);
+	        	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(contentPane);
+	        	frame.dispose();
+
+	        	new foodApp().frame.setVisible(true);
+	        	
 				
 			}
 	      });

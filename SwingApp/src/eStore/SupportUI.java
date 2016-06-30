@@ -21,6 +21,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingUtilities;
 
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -182,6 +183,13 @@ public class SupportUI extends JFrame
 			JButton btnLogout = new JButton("Logout");
 			btnLogout.setBounds(497, 504, 97, 25);
 			contentPane.add(btnLogout);
+			btnLogout.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(contentPane);
+		        	frame.dispose();
+
+		        	new foodApp().frame.setVisible(true);
+				}});
 		
 		
 	}
