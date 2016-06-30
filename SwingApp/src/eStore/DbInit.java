@@ -132,12 +132,13 @@ public class DbInit {
 
 			statement.executeUpdate(createTableEmployeeQuery2);		
 
-			String createTableTicketQuery1 = "DROP TABLE IF EXISTS ticket;";
-			statement.executeUpdate(createTableTicketQuery1);
+			//String createTableTicketQuery1 = "DROP TABLE IF EXISTS ticket;";
+			//statement.executeUpdate(createTableTicketQuery1);
 			String createTableTicketQuery2 = 
 					"CREATE TABLE IF NOT EXISTS ticket ("
 								+"ticketID varchar(50) NOT NULL,"
 								+"ticketAssignee varchar(50) NOT NULL,"
+								+"ticketReporter varchar(50) NOT NULL,"
 								+"ticketDescription varchar(500) NOT NULL,"
 								+"ticketStatus varchar(20) NOT NULL,"
 								+"ticketSolution varchar(500),"

@@ -409,5 +409,50 @@ public static void updateNonOrderDelivery(String order_id){
 		
 		
 	}
+	public static ArrayList<SupportTicket> getSupportTicketList(String user)
+	{
+		try
+		{
+			String query="select ticketID,ticketDescription,ticketReporter from ticket where ticketAssignee="+"'"+user+"'";
+			PreparedStatement pst = DbInit.conn.prepareStatement(query);
+			ResultSet rs=pst.executeQuery();
+			
+			ArrayList<SupportTicket> res = new ArrayList<SupportTicket>();
+		
+			
+				while(rs.next())
+				{
+					SupportTicket n=new SupportTicket();
+					n.supportTicketID=rs.getString("ticketID");
+					n.problemDetails=rs.getString("ticketDescription");
+					n.reporter=rs.getString("ticketReporter");
+					res.add(n);
+				}
+				return res;
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		return null;
+		
+	}
+	public static void updateSupportListDetails(SupportTicket st)
+	{
+		String insertIntoSupportQuery = "UPDATE ticket SET ticketSolution="+"'"+st.proposedSolution+"' ,ticketStatus="+"'"+st.status+"'"+
+										 "where ticketID="+"'"+st.supportTicketID+"'" ;
+		try{
+			PreparedStatement pst = DbInit.conn.prepareStatement(insertIntoSupportQuery);
+		
+			pst.executeUpdate();
+		}
+		catch (SQLIntegrityConstraintViolationException  e) 
+		{	
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 		
 }

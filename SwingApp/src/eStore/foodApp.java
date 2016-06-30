@@ -11,6 +11,9 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import eStore.DbInit;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import java.awt.Font;
 
 public class foodApp {
 
@@ -50,25 +53,25 @@ public class foodApp {
 	private void initialize() {
 		frame = new JFrame();
 		
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 697, 414);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
 		JLabel lblUserid = new JLabel("UserID");
-		lblUserid.setBounds(48, 78, 56, 16);
+		lblUserid.setBounds(48, 149, 56, 16);
 		frame.getContentPane().add(lblUserid);
 		
 		JLabel lblPassword = new JLabel("Password");
-		lblPassword.setBounds(48, 130, 56, 16);
+		lblPassword.setBounds(48, 196, 56, 16);
 		frame.getContentPane().add(lblPassword);
 		
 		textField = new JTextField();
-		textField.setBounds(121, 75, 116, 22);
+		textField.setBounds(116, 146, 207, 22);
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
 		passwordField = new JPasswordField();
-		passwordField.setBounds(121, 127, 116, 22);
+		passwordField.setBounds(116, 193, 207, 22);
 		frame.getContentPane().add(passwordField);
 		
 		JButton btnLogin = new JButton("Login");
@@ -98,8 +101,19 @@ public class foodApp {
 					}
 					else if (pv.equals("SU")) //Support
 					{
+						frame.setVisible(false);
+						SupportUI sui = new SupportUI(textField.getText());
+						sui.setVisible(true);
 						
 					}
+					else
+					{
+						JOptionPane.showMessageDialog(frame, "Sorry, User ID/Password doesn't match ");
+					}
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(frame, "Sorry, User ID/Password doesn't match ");
 				}
 			}
 			else
@@ -108,8 +122,10 @@ public class foodApp {
 					{
 						frame.setVisible(false);
 						
-						new homepage(textField.getText()).setVisible(true);
+						new homePage(textField.getText()).setVisible(true);
 					}
+				else
+					JOptionPane.showMessageDialog(frame, "Sorry, User ID/Password doesn't match ");
 					
 					
 				}
@@ -122,7 +138,7 @@ public class foodApp {
 				
 			}
 		});
-		btnLogin.setBounds(273, 126, 97, 25);
+		btnLogin.setBounds(356, 192, 97, 25);
 		frame.getContentPane().add(btnLogin);
 		
 		JButton btnNewButton = new JButton("New User ? Create Account");
@@ -134,7 +150,18 @@ public class foodApp {
 				
 			}
 		});
-		btnNewButton.setBounds(121, 190, 221, 25);
+		btnNewButton.setBounds(121, 254, 221, 25);
 		frame.getContentPane().add(btnNewButton);
+		
+		JLabel lblWelcomeToFood = new JLabel("Welcome to Food Store...!! ");
+		lblWelcomeToFood.setFont(new Font("Tahoma", Font.PLAIN, 25));
+		lblWelcomeToFood.setHorizontalAlignment(SwingConstants.CENTER);
+		lblWelcomeToFood.setForeground(new Color(160, 82, 45));
+		lblWelcomeToFood.setBounds(30, 29, 476, 53);
+		frame.getContentPane().add(lblWelcomeToFood);
+		
+		JLabel lblNewLabel = new JLabel("Login to shop. ");
+		lblNewLabel.setBounds(116, 107, 110, 16);
+		frame.getContentPane().add(lblNewLabel);
 	}
 }

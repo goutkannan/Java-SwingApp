@@ -48,7 +48,7 @@ import java.awt.event.MouseListener;
 import javax.swing.JTextField;
 
 @SuppressWarnings("serial")
-public class homepage extends JFrame {
+public class homePage extends JFrame {
 	
 
 	private JPanel contentPane;
@@ -111,7 +111,7 @@ public class homepage extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public homepage(String user) {
+	public homePage(String user) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 1182, 884);
 		contentPane = new JPanel();
