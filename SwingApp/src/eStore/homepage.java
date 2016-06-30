@@ -38,6 +38,8 @@ import javax.swing.UIManager;
 import javax.swing.JTable;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
+
 import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -240,6 +242,15 @@ public class homePage extends JFrame {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(805, 365, 189, 43);
 		Paymentpanel.add(btnCancel);
+		btnCancel.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				contentPane.setVisible(false);
+	        	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(contentPane);
+				frame.dispose();
+
+	        	new foodApp().frame.setVisible(true);
+			}
+			});
 		
 		lblYourTotal = new Label("Your Total: ");
 		lblYourTotal.setBounds(805, 187, 189, 34);
