@@ -23,6 +23,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import java.awt.Font;
 import java.awt.Image;
@@ -59,13 +60,15 @@ public class homePage extends JFrame {
 	// new code 
 	private JTable Checkouttable;
 	private JTabbedPane tabbedPane;
-	private Label Totallabel, lblYourTotal;
+	private Label Totallabel, lblYourTotal, lblAmountPayableOn;
+	private JLabel lblShippingAddress;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField txtMmyy;
 	private JTextField textField_2;
 	private float total = 0;
 	
+	private JTextField textField_3;
 	// new code end
 	/**
 	 * Create the panel.
@@ -194,8 +197,41 @@ public class homePage extends JFrame {
 		tabbedPane_1.setBounds(39, 55, 666, 478);
 		Paymentpanel.add(tabbedPane_1);
 		
+		// Cash Tab
 		JPanel panel_1 = new JPanel();
 		tabbedPane_1.addTab("Cash", null, panel_1, null);
+		panel_1.setLayout(null);
+
+		lblAmountPayableOn = new Label("Amount Payable On Delivery");
+		lblAmountPayableOn.setBounds(31, 48, 364, 53);
+		lblAmountPayableOn.setFont(new Font("Serif", Font.BOLD, 20));
+		panel_1.add(lblAmountPayableOn);
+		
+		JLabel lblExtraCodCharges = new JLabel("Extra COD charges ($5) will be applied for this option");
+		lblExtraCodCharges.setBounds(31, 129, 390, 43);
+		lblExtraCodCharges.setFont(new Font("Times New Roman", Font.PLAIN, 16));
+		panel_1.add(lblExtraCodCharges);
+		
+		JLabel lblTip = new JLabel("Tip:- ");
+		lblTip.setBounds(31, 358, 69, 28);
+		lblTip.setFont(new Font("Times New Roman", Font.BOLD, 18));
+		lblTip.setForeground(Color.blue);
+		panel_1.add(lblTip);
+		
+		JLabel lblAvoidExtraCod = new JLabel("Avoid extra COD charges when you pay by Credit Card or Debit Card ");
+		lblAvoidExtraCod.setBounds(55, 387, 571, 28);
+		lblAvoidExtraCod.setFont(new Font("Times New Roman", Font.ITALIC, 14));
+		panel_1.add(lblAvoidExtraCod);
+		
+		lblShippingAddress = new JLabel("Shipping Address");
+		lblShippingAddress.setBounds(31, 196, 160, 35);
+		panel_1.add(lblShippingAddress);
+				
+		textField_3 = new JTextField();
+		textField_3.setBounds(31, 244, 227, 101);
+		panel_1.add(textField_3);
+		textField_3.setColumns(10);
+		textField_3.setText(shipping_address);
 		
 		JPanel panel_2 = new JPanel();
 		tabbedPane_1.addTab("Credit", null, panel_2, null);
@@ -237,15 +273,41 @@ public class homePage extends JFrame {
 		panel_2.add(textField_2);
 		textField_2.setColumns(10);
 		
+		lblShippingAddress = new JLabel("Shipping Address");
+		lblShippingAddress.setBounds(394, 44, 208, 22);
+		panel_2.add(lblShippingAddress);
+		
+		textField_3 = new JTextField();
+		textField_3.setBounds(394, 79, 198, 73);
+		panel_2.add(textField_3);
+		textField_3.setText(shipping_address);
+		textField_3.setColumns(10);
+		
 	    
-		JPanel panel_3 = new JPanel();
-		tabbedPane_1.addTab("Debit", null, panel_3, null);
+//		JPanel panel_3 = new JPanel();
+//		tabbedPane_1.addTab("Debit", null, panel_3, null);
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setBounds(805, 365, 189, 43);
 		Paymentpanel.add(btnCancel);
 		btnCancel.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+//				contentPane.setVisible(false);
+//	        	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(contentPane);
+//				frame.dispose();
+//
+//	        	new foodApp().frame.setVisible(true);
+				tabbedPane.setSelectedIndex(1);
+			}
+			});
+		JButton btnLogout = new JButton("LOGOUT");
+		btnLogout.setBounds(805, 444, 189, 43);
+		Paymentpanel.add(btnLogout);
+		btnLogout.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
 				contentPane.setVisible(false);
 	        	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(contentPane);
 				frame.dispose();
@@ -366,13 +428,14 @@ public class homePage extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				for(int j=0;j<myList.size();j++)
 				{
-					myList.get(j).idOrders = "Ord"+String.valueOf(i); 
+					//myList.get(j).idOrders = "Ord"+String.valueOf(i); 
 					myList.get(j).idCustomer = user;
 					myList.get(j).shippingAddress = shipping_address; 
 					
 					dbutilities.setOrders(myList.get(j));
 					
 				}
+				JOptionPane.showMessageDialog(null,"Your order has been placed");
 			}
 			});
 	}

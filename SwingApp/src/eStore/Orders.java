@@ -1,7 +1,7 @@
 package eStore;
 
 public class Orders {
-	String idOrders;
+	int idOrders;
 	String idCustomer;
 	String idProduct;
 	String shippingAddress;
@@ -37,10 +37,10 @@ public class Orders {
 	public void setDeliveryStatus(Boolean deliveryStatus) {
 		this.deliveryStatus = deliveryStatus;
 	}
-	public String getIdOrders() {
+	public int getIdOrders() {
 		return idOrders;
 	}
-	public void setIdOrders(String idOrders) {
+	public void setIdOrders(int idOrders) {
 		this.idOrders = idOrders;
 	}
 	public String getIdCustomer() {

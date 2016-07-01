@@ -144,7 +144,7 @@ public class Cdetails extends JFrame {
 		textExp.setColumns(10);
 		
 		JButton btnSubmit = new JButton("Submit");
-		btnSubmit.setBounds(332, 592, 73, 25);
+		btnSubmit.setBounds(332, 592, 90, 25);
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) 
 			{
@@ -154,54 +154,60 @@ public class Cdetails extends JFrame {
 				try {
 					Customer cobj= new Customer(); 
 					
-					cobj.custFName = textFName.getText();
-					if(cobj.custFName.equals(""))
+					
+					if(textFName.getText().equals(""))
 					{
 						msg[i]="No data entered for first name"+"\n";
 						i++;
 						++flag;
 						//JOptionPane.showMessageDialog(null,"No Data Entered");
 					}
-					if(!(cobj.custFName.matches("[a-zA-Z]*")))
+					else if(!(textFName.getText().matches("[a-zA-Z]*")))
 					{
 						msg[i]="Enter only alphabets for first name"+"\n";
 						i++;
 						++flag;
 						//JOptionPane.showMessageDialog(null, "Enter only alphabets");
 					}
+					else
+						cobj.custFName = textFName.getText();
 
-					cobj.custLName  = textLName.getText();
-					if(cobj.custLName.equals(""))
+					
+					if(textLName.getText().equals(""))
 					{
 						msg[i]="No data entered for last name"+"\n";
 						i++;
 						++flag;
 						//JOptionPane.showMessageDialog(null,"No Data Entered");
 					}
-					if(!(cobj.custLName.matches("[a-zA-Z]*")))
+					else if(!(textLName.getText().matches("[a-zA-Z]*")))
 					{
 						msg[i]="Enter only alphabets for last name"+"\n";
 						i++;
 						++flag;
 						//JOptionPane.showMessageDialog(null, "Enter only alphabets");
 					}
+					else
+						cobj.custLName  = textLName.getText();
 
 					//String EMAIL_REGEX = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
-					cobj.custID = textuserid.getText();
-					if(cobj.custID.equals(""))
+					
+					if(textuserid.getText().equals(""))
 					{
 						msg[i]="No data entered for email address"+"\n";
 						i++;
 						++flag;
 						//JOptionPane.showMessageDialog(null, "Enter valid email address");
 					}
+					else
+						cobj.custID = textuserid.getText();
 					/*if(!(cobj.custID.matches(EMAIL_REGEX)))
 					{
 						JOptionPane.showMessageDialog(null, "Enter valid email address");
 					}*/
 
-					cobj.custAddress = textAddress.getText();
-					if(cobj.custAddress.equals(""))
+					
+					if(textAddress.getText().equals(""))
 					{
 						
 						msg[i]="Enter valid address,";
@@ -209,35 +215,30 @@ public class Cdetails extends JFrame {
 						++flag;
 						//JOptionPane.showMessageDialog(null,"No Data Entered");
 					}
+					else
+						cobj.custAddress = textAddress.getText();
 
-					cobj.custState = textState.getText();
-					if(cobj.custState.equals(""))
+					
+					if(textState.getText().equals(""))
 					{
 						msg[i]="No Data entered for state"+"\n";
 						i++;
 						++flag;
 						//JOptionPane.showMessageDialog(null,"No Data Entered");
 					}
-					if(!(cobj.custState.matches("([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"   )))
-					{
-						msg[i]="Enter valid state"+"\n";
-						i++;
-						++flag;
-						//JOptionPane.showMessageDialog(null, "Enter valid State");
-					}
+					else
+						cobj.custState = textState.getText();
+					
+					
 
 					if(passwordField.getText().equals(passwordField_1.getText()))
-						cobj.custPswd = passwordField.getPassword().toString();
+						cobj.custPswd = passwordField.getText().toString();
 					else
 						cobj.custPswd="temp";
 					
-					int numberofDigits=1;	
-					cobj.custZip = Integer.parseInt(textZip.getText());
-					while((cobj.custZip=cobj.custZip/10)!=0)
-					{
-						++numberofDigits;
-					}
-					if(numberofDigits!=5)
+				
+					
+					if(textZip.getText().length() !=5)
 					{
 
 						msg[i]="Enter valid zip"+"\n";
@@ -245,59 +246,69 @@ public class Cdetails extends JFrame {
 						++flag;
 						//JOptionPane.showMessageDialog(null, "Enter Valid Zip");
 					}
+					else
+						cobj.custZip = Integer.parseInt(textZip.getText());
 					
-					cobj.nameonCard = textNameCard.getText();
-					if(cobj.nameonCard.equals(""))
+					
+					if(textNameCard.getText().equals(""))
 					{
 						msg[i]="No Data entered for name on card"+"\n";
 						i++;
 						++flag;
 						//JOptionPane.showMessageDialog(null,"No Data Entered");
 					}
-					if(!(cobj.nameonCard.matches("([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"   )))
+					
+						
+					else if(!(textNameCard.getText().matches("([a-zA-Z]+|[a-zA-Z]+\\s[a-zA-Z]+)"   )))
 					{
 						msg[i]="Enter valid name on card"+"\n";
 						i++;
 						++flag;
 						//JOptionPane.showMessageDialog(null, "Enter valid Name");
 					}
+					else
+						cobj.nameonCard = textNameCard.getText();
+				
 					
-					int check=1;
-					cobj.cardNumber = Long.parseLong(textcardNumber.getText());
-					while((cobj.cardNumber=cobj.cardNumber/10)!=0)
-					{
-						++check;
-					}
-					if(check==1||check!=16)
+					
+					if( textcardNumber.getText().length()!=16  )
 					{
 						msg[i]="Enter valid card number"+"\n";
 						i++;
 						++flag;
 						//JOptionPane.showMessageDialog(null, "Enter valid card number");
 					}
+					else
+						cobj.cardNumber = Long.parseLong(textcardNumber.getText());
+						
 					
-					int noofDigits1=1;
-					cobj.cvv = Integer.parseInt(textCVV.getText());
-					while((cobj.cvv=cobj.cvv/10)!=0)
-					{
-						++noofDigits1;
-					}
-					if(noofDigits1!=3)
+					
+					
+					
+					if(textCVV.getText().length()!=3)
 					{
 						msg[i]="CVV should be only 3 numbers"+"\n";
 						i++;
 						++flag;
 						//JOptionPane.showMessageDialog(null, "CVV must be 3 numbers");
 					}
-					cobj.exp = textExp.getText();
-					if(!(cobj.exp.matches("\\d{2}\\/\\d{2}")))
+					else
+						cobj.cvv = Integer.parseInt(textCVV.getText());
+					
+					
+					if(!(textExp.getText().matches("\\d{2}\\/\\d{2}")))
 					{
 						msg[i]="Enter correct date"+"\n";
 						i++;
 						++flag;
 					}
+					else
+						cobj.exp = textExp.getText();
 	
-					if(msg.length>1)
+					
+				
+					// get Db connection 
+					if(flag!=0)
 					{
 						StringBuilder strBuilder = new StringBuilder();
 						for (int j = 0; j < msg.length; j++) {
@@ -308,34 +319,29 @@ public class Cdetails extends JFrame {
 						if(flag!=0)
 						JOptionPane.showMessageDialog(null,newString);
 					}
-					cobj.exp = textExp.getText();
-					if(!(cobj.exp.matches("\\d{2}\\/\\d{4}")))
-					{
-						msg[i]="Enter correct date"+"\n";
-						i++;
-						++flag;
-					}
-					// get Db connection 
-					
-					dbutilities db = new dbutilities();
-				
-					int err = db.updateCustomerDetails(cobj);
-					if (err==1)
-					{
-						JOptionPane.showMessageDialog(contentPane,"Welcome aboard "+ cobj.custID +" your account has been registered");
-						contentPane.setVisible(false);
-						JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(contentPane);
-			        	frame.dispose();
-
-			        	new foodApp().frame.setVisible(true);
-					}
-					else if(err==2)
-					{
-						JOptionPane.showMessageDialog(contentPane,"Sorry "+ cobj.custID +" already exists, try a different one");
-					}
 					else
 					{
-						JOptionPane.showMessageDialog(contentPane,"Sorry registration falied ");
+					
+						dbutilities db = new dbutilities();
+					
+						int err = db.updateCustomerDetails(cobj);
+						if (err==1)
+						{
+							JOptionPane.showMessageDialog(contentPane,"Welcome aboard "+ cobj.custID +" your account has been registered");
+							contentPane.setVisible(false);
+							JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(contentPane);
+				        	frame.dispose();
+	
+				        	new foodApp().frame.setVisible(true);
+						}
+						else if(err==2)
+						{
+							JOptionPane.showMessageDialog(contentPane,"Sorry "+ cobj.custID +" already exists, try a different one");
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(contentPane,"Sorry registration falied ");
+						}
 					}
 				} catch (NumberFormatException e) {
 					// TODO Auto-generated catch block
@@ -399,5 +405,20 @@ public class Cdetails extends JFrame {
 		contentPane.add(textAddress);
 		contentPane.add(textState);
 		
+		  JButton btnCancel_1 = new JButton("Cancel");
+	        btnCancel_1.setBounds(447, 592, 97, 25);
+	        contentPane.add(btnCancel_1);
+	        btnCancel_1.setBackground(new Color(154, 205, 50));
+	        btnCancel_1.addActionListener(new ActionListener() {
+	            
+	            @Override
+	            public void actionPerformed(ActionEvent e) {
+	                // TODO Auto-generated method stub
+	                contentPane.setVisible(false);
+	                JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(contentPane);
+	                frame.dispose();
+	                new foodApp().frame.setVisible(true);
+	            }
+	        });
 	}
 }

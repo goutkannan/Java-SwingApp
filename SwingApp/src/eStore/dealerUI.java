@@ -12,6 +12,7 @@ import net.proteanit.sql.DbUtils;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -171,5 +172,18 @@ public class dealerUI extends JFrame {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
+		
+		JButton btnNewButton = new JButton("LogOut");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				contentPane.setVisible(false);
+	        	JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(contentPane);
+	        	frame.dispose();
+
+	        	new foodApp().frame.setVisible(true);
+			}
+		});
+		btnNewButton.setBounds(696, 107, 124, 25);
+		contentPane.add(btnNewButton);
 	}
 }

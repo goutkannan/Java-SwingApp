@@ -89,8 +89,8 @@ public class dbutilities
 		one_store.idItem="item_001";
 		one_store.inStock=true;
 		one_store.isnew="y";
-		one_store.itemDescription="Description of Item 001";
-		one_store.itemName="Item Name 001";
+		one_store.itemDescription="Non Dairy Creame";
+		one_store.itemName="cofffemate";
 		one_store.price=(float) 4.99;
 		one_store.selected=false;
 		one_store.stock=8;
@@ -105,8 +105,8 @@ public class dbutilities
 		two_store.idItem="item_002";
 		two_store.inStock=true;
 		two_store.isnew="y";
-		two_store.itemDescription="Description of Item 002";
-		two_store.itemName="Item Name 002";
+		two_store.itemDescription="Homade Chocolate chip cookies";
+		two_store.itemName="cookies";
 		two_store.price=(float) 2.99;
 		two_store.selected=false;
 		two_store.stock=7;
@@ -120,9 +120,9 @@ public class dbutilities
 		three_store.idItem="item_003";
 		three_store.inStock=true;
 		three_store.isnew="y";
-		three_store.itemDescription="Description of Item 003";
-		three_store.itemName="Item Name 003";
-		three_store.price=(float) 12.99;
+		three_store.itemDescription="Salted roasted peanuts";
+		three_store.itemName="peanuts";
+		three_store.price=(float) 2.99;
 		three_store.selected=false;
 		three_store.stock=10;
 		
@@ -135,19 +135,110 @@ public class dbutilities
 		four_store.idItem="item_004";
 		four_store.inStock=false;
 		four_store.isnew="y";
-		four_store.itemDescription="Description of Item 004";
-		four_store.itemName="Item Name 004";
-		four_store.price=(float) 12.99;
+		four_store.itemDescription="Classic sandwich cookies";
+		four_store.itemName="oreo";
+		four_store.price=(float) 1.99;
 		four_store.selected=true;
 		four_store.stock=0;
 		
-//		Store five_store = new Store();
+
+		 Store five_store = new Store();
+		 five_store.dealerName = "Kellogs";
+		 five_store.discount=0;
+	        p = Paths.get(".").toAbsolutePath().normalize().toString()+ "\\src\\eStore\\cornflakes.jpeg" ;
+	        five_store.icon_filename=p;
+	        five_store.idItem="item_005";
+	        five_store.inStock=true;
+	        five_store.isnew="y";
+	        five_store.itemDescription="Delicious Fat Free Breakfast";
+	        five_store.itemName="Kellogs Corn Flakes";
+	        five_store.price=(float) 15.68;
+	        five_store.selected=true;
+	        five_store.stock=140;
+	        
+	        Store six_store = new Store();
+	        six_store.dealerName = "Doritos";
+	        six_store.discount=0;
+	        p = Paths.get(".").toAbsolutePath().normalize().toString()+ "\\src\\eStore\\doritos.jpeg" ;
+	        six_store.icon_filename=p;
+	        six_store.idItem="item_006";
+	        six_store.inStock=true;
+	        six_store.isnew="y";
+	        six_store.itemDescription="Cheese Falvoured Tortilla Chips";
+	        six_store.itemName="Doritos";
+	        six_store.price=(float) 3.68;
+	        six_store.selected=true;
+	        six_store.stock=66;
+	        
+	        Store seven_store = new Store();
+	        seven_store.dealerName = "Lipton";
+	        seven_store.discount=0;
+	        p = Paths.get(".").toAbsolutePath().normalize().toString()+ "\\src\\eStore\\liptonIceTea.jpeg" ;
+	        seven_store.icon_filename=p;
+	        seven_store.idItem="item_007";
+	        seven_store.inStock=true;
+	        seven_store.isnew="y";
+	        seven_store.itemDescription="Real Tea Leaves";
+	        seven_store.itemName="Lipton Iced Tea";
+	        seven_store.price=(float) 5.99;
+	        seven_store.selected=true;
+	        seven_store.stock=17;
+	        
+	        Store eight_store = new Store();
+	        eight_store.dealerName = "Quaker";
+	        eight_store.discount=0;
+	        p = Paths.get(".").toAbsolutePath().normalize().toString()+ "\\src\\eStore\\oats.jpeg" ;
+	        eight_store.icon_filename=p;
+	        eight_store.idItem="item_008";
+	        eight_store.inStock=true;
+	        eight_store.isnew="y";
+	        eight_store.itemDescription="Natural Whole Grain";
+	        eight_store.itemName="Quaker Oats";
+	        eight_store.price=(float) 4.08;
+	        eight_store.selected=true;
+	        eight_store.stock=5;
+	        
+	        Store nine_store = new Store();
+	        nine_store.dealerName = "Heinz";
+	        nine_store.discount=0;
+	        p = Paths.get(".").toAbsolutePath().normalize().toString()+ "\\src\\eStore\\Heinz_TomatoKetchup.jpeg" ;
+	        nine_store.icon_filename=p;
+	        nine_store.idItem="item_009";
+	        nine_store.inStock=true;
+	        nine_store.isnew="y";
+	        nine_store.itemDescription="Gluten Free";
+	        nine_store.itemName="Heinz TomatoKetchup";
+	        nine_store.price=(float) 2.88;
+	        nine_store.selected=true;
+	        nine_store.stock=10;
+	        
+	        Store ten_store = new Store();
+	        ten_store.dealerName = "Ritz";
+	        ten_store.discount=0;
+	        p = Paths.get(".").toAbsolutePath().normalize().toString()+ "\\src\\eStore\\ritzcrackers.jpeg" ;
+	        ten_store.icon_filename=p;
+	        ten_store.idItem="item_010";
+	        ten_store.inStock=true;
+	        ten_store.isnew="y";
+	        ten_store.itemDescription="Filling made with real cheese";
+	        ten_store.itemName="Ritz Crackers";
+	        ten_store.price=(float) 3.68;
+	        ten_store.selected=true;
+	        ten_store.stock=15;
+	        
+	        storeList.add(one_store);
+	        storeList.add(two_store);
+	        storeList.add(three_store);
+	        storeList.add(four_store);
+	        storeList.add(five_store);
+	        storeList.add(six_store);
+	        storeList.add(seven_store);
+	        storeList.add(eight_store);
+	        storeList.add(nine_store);
+	        storeList.add(ten_store);
 
 		
-		storeList.add(one_store);
-		storeList.add(two_store);
-		storeList.add(three_store);
-		storeList.add(four_store);
+		
 		for(Store stores : storeList){
 			updateStoreListDetails(stores);
 		}
@@ -418,7 +509,7 @@ public static void updateNonOrderDelivery(String order_id){
 				while(rs.next())
 				{
 					Orders p = new Orders();
-					p.idOrders = rs.getString("idOrders"); 
+					//p.idOrders = rs.getString("idOrders"); 
 					p.idCustomer = rs.getString("idCustomer");
 					p.idProduct = rs.getString("idProduct");
 					p.shippingAddress = rs.getString("shippingAddress");
@@ -575,7 +666,7 @@ public static void updateNonOrderDelivery(String order_id){
 		
 		try{
 			PreparedStatement pst = DbInit.conn.prepareStatement(insertIntoSupportQuery);
-			pst.setString(1, orders.idOrders);
+			//pst.setString(1, orders.idOrders);
 			pst.setString(2, orders.idCustomer);
 			pst.setString(3, orders.idProduct);
 			pst.setString(4, orders.shippingAddress);
@@ -592,6 +683,25 @@ public static void updateNonOrderDelivery(String order_id){
 		catch (SQLException e) {
 		e.printStackTrace();
 		}
+	}
+	public static void setAssignee(String string, int supportTicketID) {
+
+		String insertIntoSupportQuery = "UPDATE ticket SET ticketAssignee="+"'"+string+"'"+
+										 "where ticketID="+"'"+supportTicketID+"'" ;
+		try{
+			PreparedStatement pst = DbInit.conn.prepareStatement(insertIntoSupportQuery);
+		
+			pst.executeUpdate();
+		}
+		catch (SQLIntegrityConstraintViolationException  e) 
+		{	
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			e.printStackTrace();
+		}
+		// TODO Auto-generated method stub
+		
 	}
 
 	

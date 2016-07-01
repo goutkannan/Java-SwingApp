@@ -68,7 +68,7 @@ public class DbInit {
 		+"customerFName varchar(20) NOT NULL,customerLName varchar(20) DEFAULT NULL, customerAddress varchar(200) NOT NULL,"
 		+"addressState varchar(45) NOT NULL,"
 		+"zip int(11) NOT NULL, nameonCard varchar(45) NOT NULL,"
-		+ "cardNumber int(32) NOT NULL,"
+		+ "cardNumber BIGINT(20) NOT NULL,"
 		+"CVV int(11) NOT NULL,"
 		+"expiryDate varchar(5) NOT NULL,"
 		+"password varchar(45) NOT NULL,"
@@ -83,7 +83,7 @@ public class DbInit {
 			
 			String createTableOrdersQuery2 = 
 								"CREATE TABLE IF NOT EXISTS orders ("
-			+"idOrders varchar(45) NOT NULL,"
+			+"idOrders int NOT NULL AUTO_INCREMENT,"
 			  +"idCustomer varchar(45) NOT NULL,"
 			  +"idproduct varchar(45) NOT NULL,"
 			  +"shippingAddress varchar(500) NOT NULL,"
@@ -95,8 +95,8 @@ public class DbInit {
 			
 			statement.executeUpdate(createTableOrdersQuery2);
 			
-			String createTableStoreListQuery1 = "DROP TABLE IF EXISTS storelist;";
-			statement.executeUpdate(createTableStoreListQuery1);
+			//String createTableStoreListQuery1 = "DROP TABLE IF EXISTS storelist;";
+			//statement.executeUpdate(createTableStoreListQuery1);
 			
 			String createTableStoreListQuery2 = 
 					"CREATE TABLE IF NOT EXISTS storelist ("
