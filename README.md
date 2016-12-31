@@ -1,5 +1,9 @@
-# OOAD
+# Obejct Oriented Analysis and Design 
+
 FoodStore
+
+An Java Swing based application that lays more emphasis on Object oriented analysis and Design. An sample application that mimics a e-commerce mamngement. GUI is implemented using Swing framework and the backend is MySQL.    
+
 
 People when you clone this project change the Class path relative to ur jar location. I will make it generic in next commit. 
 You can find the jars in Res folder.
